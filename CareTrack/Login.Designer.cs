@@ -123,7 +123,8 @@ namespace CareTrack
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            textBox1.Text = "Enter Username";
+            maskedTextBox1.Text = "Enter Password";
         }
 
         #endregion

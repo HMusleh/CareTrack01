@@ -12,14 +12,21 @@ namespace CareTrack
 {
     public partial class HomePage : Form
     {
-        public HomePage()
+        //passing username and caregiverId from login to homepage for future use in timekeeping
+        private string currentUser;
+        private int caregiverId;
+        public HomePage(string username, int id)
         {
             InitializeComponent();
+            //initializing components for username and id
+            currentUser = username;
+            caregiverId = id;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Timekeeping tk = new Timekeeping(currentUser, caregiverId);
+            tk.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -25,7 +25,8 @@ namespace CareTrack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=JAYLIN\\SQLEXPRESS;Database=CareTrack Database;Trusted_Connection=True;Trus" +
+            "tServerCertificate=True;")]
         public string DBConnection {
             get {
                 return ((string)(this["DBConnection"]));

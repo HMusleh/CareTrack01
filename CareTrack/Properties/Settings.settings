@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DBConnection" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Server=JAYLIN\SQLEXPRESS;Database=CareTrack Database;Trusted_Connection=True;TrustServerCertificate=True;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

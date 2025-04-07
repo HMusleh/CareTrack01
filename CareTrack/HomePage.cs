@@ -21,17 +21,23 @@ namespace CareTrack
             //initializing components for username and id
             currentUser = username;
             caregiverId = id;
+
+            //button 2 click
+            button2.Click += button2_Click;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Timekeeping tk = new Timekeeping(currentUser, caregiverId);
-            tk.ShowDialog();
+            tk.Show();
+            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Form1 schedule = new Form1(currentUser, caregiverId);
+            schedule.Show();
+            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)

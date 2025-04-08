@@ -10,12 +10,20 @@ using System.Windows.Forms;
 
 namespace CareTrack
 {
-    public partial class Signatures : Form
+    public partial class PopError : Form
     {
-        public Signatures(int caregiverId, int careplanId, List<int> taskIds, List<string> taskDescriptions)
+        public PopError()
         {
             InitializeComponent();
+        }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

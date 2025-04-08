@@ -24,6 +24,9 @@ namespace CareTrack
 
             //button 2 click
             button2.Click += button2_Click;
+
+            //button 3 click
+            button3.Click += button3_Click;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,19 +38,21 @@ namespace CareTrack
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form1 schedule = new Form1(currentUser, caregiverId);
-            schedule.Show();
+            Tasks task = new Tasks(caregiverId);
+            task.Show();
             this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Form1 schedule = new Form1(currentUser, caregiverId);
+            schedule.Show();
+            this.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button5_Click(object sender, EventArgs e)

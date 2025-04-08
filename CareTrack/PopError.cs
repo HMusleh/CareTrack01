@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace CareTrack
 {
-    public partial class Signatures : Form
+    public partial class Form1 : Form
     {
-        public Signatures(int caregiverId, int careplanId, List<int> taskIds, List<string> taskDescriptions)
+        public Form1()
         {
             InitializeComponent();
-
-
         }
     }
 }

@@ -30,229 +30,226 @@ namespace CareTrack
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
-            button2 = new Button();
-            button3 = new Button();
+            btnViewTasks = new Button();
+            btnClockInOut = new Button();
+            btnViewSchedule = new Button();
             panelMenu = new FlowLayoutPanel();
-            panel1 = new Panel();
-            button9 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            button7 = new Button();
-            button8 = new Button();
-            button1 = new Button();
+            btnDropDownMenu = new Button();
+            btnHome = new Button();
+            btnTasks = new Button();
+            btnTimeKeeping = new Button();
+            btnNotes = new Button();
+            btnLogOut = new Button();
             panelMenu.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // button2
+            // btnViewTasks
             // 
-            button2.BackColor = Color.FromArgb(255, 128, 128);
-            button2.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(663, 264);
-            button2.Name = "button2";
-            button2.Size = new Size(520, 138);
-            button2.TabIndex = 3;
-            button2.Text = "View Tasks";
-            button2.UseVisualStyleBackColor = false;
+            btnViewTasks.BackColor = Color.FromArgb(255, 128, 128);
+            btnViewTasks.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnViewTasks.Location = new Point(758, 352);
+            btnViewTasks.Margin = new Padding(3, 4, 3, 4);
+            btnViewTasks.Name = "btnViewTasks";
+            btnViewTasks.Size = new Size(594, 184);
+            btnViewTasks.TabIndex = 3;
+            btnViewTasks.Text = "View Tasks";
+            btnViewTasks.UseVisualStyleBackColor = false;
+            btnViewTasks.Click += btnViewTasks_Click;
             // 
-            // button3
+            // btnClockInOut
             // 
-            button3.BackColor = Color.FromArgb(255, 128, 128);
-            button3.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(663, 470);
-            button3.Name = "button3";
-            button3.Size = new Size(520, 138);
-            button3.TabIndex = 4;
-            button3.Text = "View Schedule";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            btnClockInOut.AutoSize = true;
+            btnClockInOut.BackColor = Color.FromArgb(255, 128, 128);
+            btnClockInOut.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClockInOut.Location = new Point(758, 77);
+            btnClockInOut.Margin = new Padding(3, 4, 3, 4);
+            btnClockInOut.Name = "btnClockInOut";
+            btnClockInOut.Size = new Size(594, 184);
+            btnClockInOut.TabIndex = 0;
+            btnClockInOut.Text = "Clock In/Out";
+            btnClockInOut.UseVisualStyleBackColor = false;
+            btnClockInOut.Click += btnClockInOut_Click;
+            // 
+            // btnViewSchedule
+            // 
+            btnViewSchedule.BackColor = Color.FromArgb(255, 128, 128);
+            btnViewSchedule.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnViewSchedule.Location = new Point(758, 627);
+            btnViewSchedule.Margin = new Padding(3, 4, 3, 4);
+            btnViewSchedule.Name = "btnViewSchedule";
+            btnViewSchedule.Size = new Size(594, 184);
+            btnViewSchedule.TabIndex = 4;
+            btnViewSchedule.Text = "View Schedule";
+            btnViewSchedule.UseVisualStyleBackColor = false;
+            btnViewSchedule.Click += btnViewSchedule_Click;
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.LightCoral;
-            panelMenu.Controls.Add(panel1);
-            panelMenu.Controls.Add(button4);
-            panelMenu.Controls.Add(button5);
-            panelMenu.Controls.Add(button6);
-            panelMenu.Controls.Add(button7);
-            panelMenu.Controls.Add(button8);
-            panelMenu.Dock = DockStyle.Right;
-            panelMenu.Location = new Point(1237, 0);
+            panelMenu.Size = new Size(306, btnDropDownMenu.Height);
+            panelMenu.Location = new Point(this.ClientSize.Width - panelMenu.Width, 0);
+            panelMenu.Location = new Point(1414, 0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(268, 666);
-            panelMenu.TabIndex = 5;
-            panelMenu.Paint += flowLayoutPanel1_Paint;
+            panelMenu.TabIndex = 6;
+            panelMenu.AutoSize = false;
+            panelMenu.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panelMenu.FlowDirection = FlowDirection.TopDown;
+            panelMenu.WrapContents = false;
+            panelMenu.Controls.Add(btnDropDownMenu);
+            panelMenu.Controls.Add(btnHome);
+            panelMenu.Controls.Add(btnTasks);
+            panelMenu.Controls.Add(btnTimeKeeping);
+            panelMenu.Controls.Add(btnNotes);
+            panelMenu.Controls.Add(btnLogOut);
             // 
-            // panel1
+            // btnDropDownMenu
             // 
-            panel1.BackgroundImageLayout = ImageLayout.Zoom;
-            panel1.Controls.Add(button9);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(265, 113);
-            panel1.TabIndex = 0;
+            btnDropDownMenu.FlatAppearance.BorderSize = 0;
+            btnDropDownMenu.FlatStyle = FlatStyle.Flat;
+            btnDropDownMenu.Image = (Image)resources.GetObject("btnDropDownMenu.Image");
+            btnDropDownMenu.Location = new Point(0, 0);
+            btnDropDownMenu.Margin = new Padding(0);
+            btnDropDownMenu.Name = "btnDropDownMenu";
+            btnDropDownMenu.Size = new Size(306, 125);
+            btnDropDownMenu.TabIndex = 0;
+            btnDropDownMenu.UseVisualStyleBackColor = true;
+            btnDropDownMenu.Click += btnDropDownMenu_Click;
             // 
-            // button9
+            // btnHome
             // 
-            button9.FlatAppearance.BorderSize = 0;
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Image = (Image)resources.GetObject("button9.Image");
-            button9.Location = new Point(3, 0);
-            button9.Name = "button9";
-            button9.Size = new Size(262, 110);
-            button9.TabIndex = 0;
-            button9.UseVisualStyleBackColor = true;
-            button9.Click += button9_Click;
+            btnHome.FlatAppearance.BorderSize = 0;
+            btnHome.FlatStyle = FlatStyle.Flat;
+            btnHome.Font = new Font("Century Gothic", 18F);
+            btnHome.ForeColor = SystemColors.ActiveCaptionText;
+            btnHome.Image = (Image)resources.GetObject("btnHome.Image");
+            btnHome.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHome.Location = new Point(3, 129);
+            btnHome.Margin = new Padding(3, 4, 3, 4);
+            btnHome.Name = "btnHome";
+            btnHome.Size = new Size(306, 108);
+            btnHome.TabIndex = 6;
+            btnHome.Tag = "Home";
+            btnHome.Text = "          Home";
+            btnHome.TextAlign = ContentAlignment.MiddleLeft;
+            btnHome.UseVisualStyleBackColor = true;
+            btnHome.Click += btnHome_Click;
             // 
-            // button4
+            // btnTasks
             // 
-            button4.Dock = DockStyle.Top;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Century Gothic", 18F);
-            button4.ForeColor = SystemColors.ActiveCaptionText;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(3, 122);
-            button4.Name = "button4";
-            button4.Size = new Size(265, 81);
-            button4.TabIndex = 6;
-            button4.Tag = "Home";
-            button4.Text = "          Home";
-            button4.TextAlign = ContentAlignment.MiddleLeft;
-            button4.UseVisualStyleBackColor = true;
+            btnTasks.FlatAppearance.BorderSize = 0;
+            btnTasks.FlatStyle = FlatStyle.Flat;
+            btnTasks.Font = new Font("Century Gothic", 18F);
+            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
+            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
+            btnTasks.Location = new Point(3, 245);
+            btnTasks.Margin = new Padding(3, 4, 3, 4);
+            btnTasks.Name = "btnTasks";
+            btnTasks.Size = new Size(306, 108);
+            btnTasks.TabIndex = 7;
+            btnTasks.Tag = "Tasks";
+            btnTasks.Text = "          Tasks";
+            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
+            btnTasks.UseVisualStyleBackColor = true;
+            btnTasks.Click += btnTasks_Click;
             // 
-            // button5
+            // btnTimeKeeping
             // 
-            button5.Dock = DockStyle.Top;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Century Gothic", 18F);
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(3, 209);
-            button5.Name = "button5";
-            button5.Size = new Size(265, 81);
-            button5.TabIndex = 7;
-            button5.Tag = "Tasks";
-            button5.Text = "          Tasks";
-            button5.TextAlign = ContentAlignment.MiddleLeft;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            btnTimeKeeping.FlatAppearance.BorderSize = 0;
+            btnTimeKeeping.FlatStyle = FlatStyle.Flat;
+            btnTimeKeeping.Font = new Font("Century Gothic", 18F);
+            btnTimeKeeping.Image = (Image)resources.GetObject("btnTimeKeeping.Image");
+            btnTimeKeeping.ImageAlign = ContentAlignment.MiddleLeft;
+            btnTimeKeeping.Location = new Point(3, 361);
+            btnTimeKeeping.Margin = new Padding(3, 4, 3, 4);
+            btnTimeKeeping.Name = "btnTimeKeeping";
+            btnTimeKeeping.Size = new Size(306, 108);
+            btnTimeKeeping.TabIndex = 8;
+            btnTimeKeeping.Tag = "Timekeeping";
+            btnTimeKeeping.Text = "          Timekeeping";
+            btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
+            btnTimeKeeping.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnNotes
             // 
-            button6.Dock = DockStyle.Top;
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Century Gothic", 18F);
-            button6.Image = (Image)resources.GetObject("button6.Image");
-            button6.ImageAlign = ContentAlignment.MiddleLeft;
-            button6.Location = new Point(3, 296);
-            button6.Name = "button6";
-            button6.Size = new Size(265, 81);
-            button6.TabIndex = 8;
-            button6.Tag = "Timekeeping";
-            button6.Text = "          Timekeeping";
-            button6.TextAlign = ContentAlignment.MiddleLeft;
-            button6.UseVisualStyleBackColor = true;
+            btnNotes.FlatAppearance.BorderSize = 0;
+            btnNotes.FlatStyle = FlatStyle.Flat;
+            btnNotes.Font = new Font("Century Gothic", 18F);
+            btnNotes.Image = (Image)resources.GetObject("btnNotes.Image");
+            btnNotes.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNotes.Location = new Point(3, 477);
+            btnNotes.Margin = new Padding(3, 4, 3, 4);
+            btnNotes.Name = "btnNotes";
+            btnNotes.Size = new Size(306, 108);
+            btnNotes.TabIndex = 9;
+            btnNotes.Tag = "Notes";
+            btnNotes.Text = "          Notes";
+            btnNotes.TextAlign = ContentAlignment.MiddleLeft;
+            btnNotes.UseVisualStyleBackColor = true;
+            btnNotes.Click += btnNotes_Click;
             // 
-            // button7
+            // btnLogOut
             // 
-            button7.Dock = DockStyle.Top;
-            button7.FlatAppearance.BorderSize = 0;
-            button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Century Gothic", 18F);
-            button7.Image = (Image)resources.GetObject("button7.Image");
-            button7.ImageAlign = ContentAlignment.MiddleLeft;
-            button7.Location = new Point(3, 383);
-            button7.Name = "button7";
-            button7.Size = new Size(265, 81);
-            button7.TabIndex = 9;
-            button7.Tag = "Notes";
-            button7.Text = "          Notes";
-            button7.TextAlign = ContentAlignment.MiddleLeft;
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += button7_Click;
-            // 
-            // button8
-            // 
-            button8.Dock = DockStyle.Top;
-            button8.FlatAppearance.BorderSize = 0;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Century Gothic", 18F);
-            button8.Image = (Image)resources.GetObject("button8.Image");
-            button8.ImageAlign = ContentAlignment.MiddleLeft;
-            button8.Location = new Point(3, 470);
-            button8.Name = "button8";
-            button8.Size = new Size(265, 81);
-            button8.TabIndex = 10;
-            button8.Tag = "Logout";
-            button8.Text = "          Logout";
-            button8.TextAlign = ContentAlignment.MiddleLeft;
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click;
-            // 
-            // button1
-            // 
-            button1.AutoSize = true;
-            button1.BackColor = Color.FromArgb(255, 128, 128);
-            button1.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(663, 58);
-            button1.Name = "button1";
-            button1.Size = new Size(520, 138);
-            button1.TabIndex = 0;
-            button1.Text = "Clock In/Out";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnLogOut.FlatAppearance.BorderSize = 0;
+            btnLogOut.FlatStyle = FlatStyle.Flat;
+            btnLogOut.Font = new Font("Century Gothic", 18F);
+            btnLogOut.Image = (Image)resources.GetObject("btnLogOut.Image");
+            btnLogOut.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLogOut.Location = new Point(3, 593);
+            btnLogOut.Margin = new Padding(3, 4, 3, 4);
+            btnLogOut.Name = "btnLogOut";
+            btnLogOut.Size = new Size(306, 108);
+            btnLogOut.TabIndex = 10;
+            btnLogOut.Tag = "Logout";
+            btnLogOut.Text = "          Logout";
+            btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogOut.UseVisualStyleBackColor = true;
+            btnLogOut.Click += btnLogOut_Click;
             // 
             // HomePage
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1505, 666);
+            ClientSize = new Size(1720, 888);
             Controls.Add(panelMenu);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnViewSchedule);
+            Controls.Add(btnViewTasks);
+            Controls.Add(btnClockInOut);
             DoubleBuffered = true;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HomePage";
             RightToLeft = RightToLeft.No;
             Text = "CT - Home";
             panelMenu.ResumeLayout(false);
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            CollapseMenu();
-        }
 
-        private void CollapseMenu()
-        {
-         
-        }
+        //private void button9_Click(object sender, EventArgs e)
+        //{
+        //   CollapseMenu();
+        // }
+
+        //private void CollapseMenu()
+        //{
+
+        //}
 
         #endregion
-        private Button button2;
-        private Button button3;
+        private Button btnViewTasks;
+        private Button btnViewSchedule;
+        private Button btnClockInOut;
         private FlowLayoutPanel panelMenu;
-        private Panel panel1;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
-        private Button button8;
-        private Button button1;
-        private Button button9;
+        private Button btnHome;
+        private Button btnDropDownMenu;
+        private Button btnLogOut;
+        private Button btnNotes;
+        private Button btnTimeKeeping;
+        private Button btnTasks;
     }
 }

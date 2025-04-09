@@ -39,8 +39,11 @@
             button6 = new Button();
             button7 = new Button();
             button8 = new Button();
+            TableTasks = new TableLayoutPanel();
+            paneltasks = new Panel();
             panelMenu.SuspendLayout();
             panel1.SuspendLayout();
+            paneltasks.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -196,6 +199,32 @@
             button8.TextAlign = ContentAlignment.MiddleLeft;
             button8.UseVisualStyleBackColor = true;
             // 
+            // TableTasks
+            // 
+            TableTasks.AutoSize = true;
+            TableTasks.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            TableTasks.ColumnCount = 1;
+            TableTasks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            TableTasks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            TableTasks.Dock = DockStyle.Top;
+            TableTasks.Location = new Point(0, 0);
+            TableTasks.Name = "TableTasks";
+            TableTasks.RowCount = 2;
+            TableTasks.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            TableTasks.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            TableTasks.Size = new Size(826, 0);
+            TableTasks.TabIndex = 14;
+            // 
+            // paneltasks
+            // 
+            paneltasks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            paneltasks.AutoScroll = true;
+            paneltasks.Controls.Add(TableTasks);
+            paneltasks.Location = new Point(548, 130);
+            paneltasks.Name = "paneltasks";
+            paneltasks.Size = new Size(826, 670);
+            paneltasks.TabIndex = 15;
+            // 
             // Tasks
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -204,6 +233,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1720, 983);
+            Controls.Add(paneltasks);
             Controls.Add(panelMenu);
             Controls.Add(label1);
             Controls.Add(button1);
@@ -212,6 +242,8 @@
             Text = "Form1";
             panelMenu.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            paneltasks.ResumeLayout(false);
+            paneltasks.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -227,5 +259,7 @@
         private Button button6;
         private Button button7;
         private Button button8;
+        private TableLayoutPanel TableTasks;
+        private Panel paneltasks;
     }
 }

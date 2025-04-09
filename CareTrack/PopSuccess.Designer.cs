@@ -1,6 +1,6 @@
 ﻿namespace CareTrack
 {
-    partial class PopError
+    partial class PopSuccessForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopError));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopSuccessForm));
             pictureBox1 = new PictureBox();
             richTextBox1 = new RichTextBox();
             button1 = new Button();

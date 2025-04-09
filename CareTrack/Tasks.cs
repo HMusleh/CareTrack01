@@ -58,12 +58,40 @@ namespace CareTrack
 
         //method for LoadTasks
         private void LoadTasks(int planId)
+   
         {
-            string query = @"SELECT t.TaskID, t.description FROM Care_Plan_Tasks cpt INNER JOIN Tasks t
+            //local list
+            List<(int TaskID, string Description)> taskList = new List<(int TaskID, string Description)>();
+
+            //aquire completed tasks first
+            HashSet<int> completedTaskId = new HashSet<int>();
+
+
+            //the query that tells the app to pull the completed tasks from previous sessions
+            string completedQuery = @"SELECT TaskID FROM completed_tasks WHERE
+                                        CaregiverID = @cid and PlanId = @pid AND Completed = 1";
+
+            using (var conn = db.OpenConnection())
+            using (var cmd = new SqlCommand(completedQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@cid", caregiverId);
+                cmd.Parameters.AddWithValue("@pid", planId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        completedTaskId.Add(Convert.ToInt32(reader["TaskID"]));
+                    }
+                }
+            }
+
+            //load all tasks query
+                string taskQuery = @"SELECT t.TaskID, t.description FROM Care_Plan_Tasks cpt INNER JOIN Tasks t
                             ON cpt.TaskID = t.TaskID WHERE cpt.CareplanID = @careplanId";
 
             using (var conn = db.OpenConnection())
-            using (var cmd = new SqlCommand(query, conn))
+            using (var cmd = new SqlCommand(taskQuery, conn))
             {
                 cmd.Parameters.AddWithValue("@careplanId", planId);
                 using (var planIdreader = cmd.ExecuteReader())
@@ -72,17 +100,44 @@ namespace CareTrack
                     while (planIdreader.Read())
                     {
                         {
-                            CheckBox cb = new CheckBox();
-                            cb.Text = planIdreader["description"].ToString();
-                            cb.Tag = planIdreader["TaskID"];
-                            cb.Font = new Font("Century Gothic", 18);
-                            cb.AutoSize = true;
-                            cb.Location = new Point(700, y);
-                            this.Controls.Add(cb);
-                            tasksCheckBoxes.Add(cb);
-                            y += 60;
+                            int taskId = Convert.ToInt32(planIdreader["TaskID"]);
+
+                            string description = planIdreader["description"].ToString();
+                            taskList.Add((taskId, description));
+
+
+                           
                         }
                     }
+                }
+
+                //clearing the table format
+                TableTasks.Controls.Clear();
+                TableTasks.RowStyles.Clear();
+                TableTasks.ColumnStyles.Clear();
+
+                TableTasks.ColumnCount = 1;
+                TableTasks.RowCount = taskList.Count;
+
+                TableTasks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+
+                //checkbox time
+
+                int rowIndex = 0;
+                foreach (var task in taskList)
+                {
+                    CheckBox cb = new CheckBox();
+                    cb.Text = task.Description;
+                    cb.Tag = task.TaskID;
+                    cb.Checked = completedTaskId.Contains(task.TaskID);
+                    cb.Font = new Font("Century Gothic", 14);
+                    cb.AutoSize = true;
+                    cb.Margin = new Padding(10, 5, 10, 5);
+
+                    TableTasks.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    TableTasks.Controls.Add(cb, 0, rowIndex++);
+                    tasksCheckBoxes.Add(cb);
+                   
                 }
 
             }
@@ -92,15 +147,41 @@ namespace CareTrack
             List<int> completedTaskIds = new List<int>();
             List<string> completedDescriptions = new List<string>();
 
+
+            //to make sure that all check boxes are clicked
+            bool allCompleted = tasksCheckBoxes.All(cb => cb.Checked);
+
             foreach (CheckBox cb in tasksCheckBoxes)
             {
-                if (cb.Checked)
+                int taskId = (int)cb.Tag;
+                bool isChecked = cb.Checked;
+
+                if (isChecked)
                 {
-                    completedTaskIds.Add((int)cb.Tag);
+                   completedTaskIds.Add(taskId);
                     completedDescriptions.Add(cb.Text);
                 }
+                //query to make it work
+
+                string query = @" MERGE completed_tasks AS target USING
+                                (SELECT @CID AS CaregiverID, @pid AS PlanID, @tid AS TaskID) AS source ON target.CaregiverID = source.CaregiverID AND target.PlanID
+                                    = source.PlanID AND target.TaskID = source.TaskID WHEN MATCHED THEN 
+                                    UPDATE SET Completed = @completed, CompletionTime = GETDATE()
+                                    WHEN NOT MATCHED THEN 
+                                    INSERT (CaregiverID, PlanID, TaskID, Completed, CompletionTime)
+                                    VALUES (@cid, @pid, @tid, @completed, GETDATE());";
+
+                using (SqlCommand cmd = new SqlCommand(query, db.OpenConnection()))
+                {
+                    cmd.Parameters.AddWithValue("@cid", caregiverId);
+                    cmd.Parameters.AddWithValue("@pid", careplanId);
+                    cmd.Parameters.AddWithValue("@tid", taskId);
+                    cmd.Parameters.AddWithValue("@completed", isChecked);
+                    cmd.ExecuteNonQuery();
+                }
             }
-            if (completedTaskIds.Count > 0)
+
+            if (allCompleted)
             {
                 Signatures signature = new Signatures(caregiverId, careplanId, completedTaskIds, completedDescriptions);
                 signature.Show();
@@ -108,7 +189,7 @@ namespace CareTrack
             }
             else
             {
-                MessageBox.Show("No tasks selected to complete.", "Info");
+                MessageBox.Show("Progress has been saved. Must complete all tasks to continue to notes and signature page.", "Incomplete Tasks");
             }
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

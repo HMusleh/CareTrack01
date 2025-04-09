@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CareTrack
 {
-    public partial class PopError : Form
+    public partial class PopSuccessForm : Form
     {
-        public PopError()
+        public PopSuccessForm()
         {
             InitializeComponent();
         }

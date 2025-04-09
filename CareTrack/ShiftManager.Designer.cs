@@ -65,7 +65,7 @@
             panelMenu.Controls.Add(btnNotes);
             panelMenu.Controls.Add(btnLogOut);
             panelMenu.FlowDirection = FlowDirection.TopDown;
-            panelMenu.Location = new Point(1206, 21);
+            panelMenu.Location = new Point(970, 21);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(306, 147);
             panelMenu.TabIndex = 6;

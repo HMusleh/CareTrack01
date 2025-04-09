@@ -64,7 +64,7 @@ namespace CareTrack
             btnLogOut.Visible = true;
 
 
-            panelMenu.Height = 800;
+            panelMenu.Height = 888;
             isMenuExpanded = true;
         }
 

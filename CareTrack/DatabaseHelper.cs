@@ -7,7 +7,8 @@ namespace CareTrack
     public class DatabaseHelper
     {
         // Retrieve the connection string from Settings
-        private string connectionString = Properties.Settings.Default.DBConnection;
+        private string connectionString = "Server=localhost\\SQLEXPRESS01;Database=CareTrackDatabase;Trusted_Connection=True;TrustServerCertificate=True;";
+
 
         // Method to open a database connection
         public SqlConnection OpenConnection()

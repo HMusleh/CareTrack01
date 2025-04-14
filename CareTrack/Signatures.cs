@@ -18,8 +18,10 @@ namespace CareTrack
         private string currentUser;
         private int caregiverId;
         private int careplanId;
-        private List<int> taskIds;
-        private List<string> taskDescriptions;
+        private List<int>? taskIds;
+        private List<string>? taskDescriptions;
+
+
 
         public Signatures(int caregiverId, int careplanId, List<int> taskIds, List<string> taskDescriptions)
         {
@@ -82,6 +84,7 @@ namespace CareTrack
         //homepage button on dropdown menu
         private void btnHome_Click(object sender, EventArgs e)
         {
+
             HomePage home = new HomePage(currentUser, caregiverId);
             home.Show();
             this.Hide();
@@ -113,7 +116,10 @@ namespace CareTrack
                 AppState.careplanId,
                 AppState.completedTaskId,
                 AppState.completedDescriptions);
+            s.Show();
+            this.Hide();
         }
+
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -134,9 +140,33 @@ namespace CareTrack
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            Timekeeping timekeeping = new Timekeeping(currentUser, caregiverId);
+            timekeeping.Show();
+            this.Hide();
+        }
 
+        private void btnClientSign_Click(object sender, EventArgs e)
+
+
+        {
+            ClientsSignatureForm clientSignature = new ClientsSignatureForm();
+            clientSignature.Show();
+            this.Hide(); // or this.Close() if you want to fully close it
+        }
+
+       
+
+        private void btnCaregiverSign_Click_1(object sender, EventArgs e)
+        {
+            CaregiverSignatureForm caregiverSignature = new CaregiverSignatureForm();
+            caregiverSignature.Show();
+            this.Hide(); // or this.Close() if needed
         }
     }
 }
+
+
+        
+

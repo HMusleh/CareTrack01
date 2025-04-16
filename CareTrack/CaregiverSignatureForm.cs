@@ -23,6 +23,12 @@ namespace CareTrack
         private List<List<Point>> strokes = new List<List<Point>>();
         private List<Point>? currentStroke = null;
 
+        //added
+        public byte[]? SignatureData { get; private set; }
+        public string SignatureType => radioDraw.Checked ? "Drawn" : "Typed";
+
+        public string TypedSignatureText => txtTypedSignature.Text.Trim();
+
         private void btnSaveSignature_Click(object sender, EventArgs e)
         {
             bool isDrawSelected = radioDraw.Checked;
@@ -51,9 +57,10 @@ namespace CareTrack
                 signatureData = ConvertTypedSignatureToImage(txtTypedSignature.Text);
             }
 
-            SaveSignatureToDatabase(signatureData);
+            SignatureData = signatureData;
 
             MessageBox.Show("Signature saved successfully!");
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -155,66 +162,78 @@ namespace CareTrack
             }
         }
 
-        private void SaveSignatureToDatabase(byte[]? caregiverSignature)
-        {
-            string connectionString = "Data Source=localhost\\SQLEXPRESS01;Initial Catalog=CareTrack Database;Integrated Security=True;TrustServerCertificate=True";
+        //again removed what wasn't neccessary anymore because of signatures page but just dashed them out
+        //so you could view if you wanted to.
+        //private void SaveSignatureToDatabase(byte[]? caregiverSignature)
+       // {
+        //    //simplified connection string
+        //    DatabaseHelper db = new DatabaseHelper();
 
-            int clientId = 1;
-            int caregiverId = 1;
-            int shiftId = GetOrCreateShiftId(connectionString, clientId, caregiverId);
+            //added more columns since combined tables
+       //     int clientId = 1;
+       //     int caregiverId = 1;
+       //     int shiftId = GetOrCreateShiftId(db, clientId, caregiverId);
+        //    string tasksPerformed = GetTasksFromCarePlan(db, clientId);
+        //    string notes = 
+        //    DateTime signedDate = DateTime.Now;
+         //   String SignatureType = radioDraw.Checked ? "Drawn" : "Typed";
+         //   String signedBy = "Caregiver Name"; 
+         //   String? typedSignatureText = radioType.Checked ? txtTypedSignature.Text.Trim() : null;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
 
-                string query = "INSERT INTO Signatures (ClientID, CaregiverID, ShiftID, CaregiverSignature, SignatureTime) " +
-                               "VALUES (@ClientID, @CaregiverID, @ShiftID, @CaregiverSignature, GETDATE())";
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ClientID", clientId);
-                    command.Parameters.AddWithValue("@CaregiverID", caregiverId);
-                    command.Parameters.AddWithValue("@ShiftID", shiftId);
-                    command.Parameters.AddWithValue("@CaregiverSignature", (object?)caregiverSignature ?? DBNull.Value);
+        //    using (SqlConnection connection = db.O
+          //  {
+          //      connection.Open();
 
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
+          //      string query = "INSERT INTO Signatures (ClientID, CaregiverID, ShiftID, CaregiverSignature, SignatureTime) " +
+           //                    "VALUES (@ClientID, @CaregiverID, @ShiftID, @CaregiverSignature, GETDATE())";
+        //
+            //    using (SqlCommand command = new SqlCommand(query, connection))
+            //    {
+             //       command.Parameters.AddWithValue("@ClientID", clientId);
+             //       command.Parameters.AddWithValue("@CaregiverID", caregiverId);
+             ///       command.Parameters.AddWithValue("@ShiftID", shiftId);
+             //       command.Parameters.AddWithValue("@CaregiverSignature", (object?)caregiverSignature ?? DBNull.Value);
+             //
+             //       command.ExecuteNonQuery();
+              //  }
+            //}
+       // }
 
-        private int GetOrCreateShiftId(string connectionString, int clientId, int caregiverId)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
+        // private int GetOrCreateShiftId(string connectionString, int clientId, int caregiverId)
+        //  {
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //   {
+        //         conn.Open();
 
-                string checkQuery = "SELECT ShiftID FROM Shifts_Assignment WHERE ClientID = @ClientID AND CaregiverID = @CaregiverID";
-                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
-                {
-                    checkCmd.Parameters.AddWithValue("@ClientID", clientId);
-                    checkCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+        //      string checkQuery = "SELECT ShiftID FROM Shifts_Assignment WHERE ClientID = @ClientID AND CaregiverID = @CaregiverID";
+        //      using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+        //      {
+        //        checkCmd.Parameters.AddWithValue("@ClientID", clientId);
+        //       checkCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
 
-                    object result = checkCmd.ExecuteScalar();
-                    if (result != null && int.TryParse(result.ToString(), out int existingShiftId))
-                    {
-                        return existingShiftId;
-                    }
-                }
+        //       object result = checkCmd.ExecuteScalar();
+        //      if (result != null && int.TryParse(result.ToString(), out int existingShiftId))
+        //     {
+        //         return existingShiftId;
+        //     }
+       //  }
 
-                string insertQuery = "INSERT INTO Shifts_Assignment (ClientID, CaregiverID, shift_date, status) " +
-                                     "OUTPUT INSERTED.ShiftID " +
-                                     "VALUES (@ClientID, @CaregiverID, @Date, @Status)";
+       // string insertQuery = "INSERT INTO Shifts_Assignment (ClientID, CaregiverID, shift_date, status) " +
+       //                     "OUTPUT INSERTED.ShiftID " +
+       //                     "VALUES (@ClientID, @CaregiverID, @Date, @Status)";
 
-                using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
-                {
-                    insertCmd.Parameters.AddWithValue("@ClientID", clientId);
-                    insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
-                    insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
-                    insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
+       // using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+       // {
+       //       insertCmd.Parameters.AddWithValue("@ClientID", clientId);
+       //       insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+       //     insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
+       //    insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
 
-                    return (int)insertCmd.ExecuteScalar();
-                }
-            }
-        }
+       //     return (int)insertCmd.ExecuteScalar();
+       //   }
+       //   }
+       // }
     }
 }

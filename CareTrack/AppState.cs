@@ -13,6 +13,8 @@ namespace CareTrack
         public static List<int> completedTaskId { get; set; } = new List<int>();
         public static List<string> completedDescriptions { get; set; } = new List<string>();
         public static bool TasksCompleted { get; set; } = false;
+
+        public static int clientId { get; set; }
     }
     
 }

@@ -362,3 +362,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Database
+/CareTrack/Properties/Settings.Designer.cs
+/CareTrack/Properties/Settings.settings
+/CareTrack/App.config
+/CareTrack/App.config
+/CareTrack/Properties/Settings.Designer.cs
+/CareTrack/Properties/Settings.settings

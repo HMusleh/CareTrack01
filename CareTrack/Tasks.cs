@@ -154,16 +154,23 @@ namespace CareTrack
 
         private int GetCarePlanId(int caregiverId)
         {
-            string query = @"SELECT cp.PlanID FROM Shifts_Assignment sa INNER JOIN CarePlans cp ON
+            string query = @"SELECT cp.PlanID, cp.ClientID FROM Shifts_Assignment sa INNER JOIN CarePlans cp ON
                             sa.ClientID = cp.ClientID WHERE sa.CaregiverID = @cid AND sa.shift_date = CAST(GETDATE() AS DATE)";
 
             using (var conn = db.OpenConnection())
             using (var cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@cid", caregiverId);
-                var result = cmd.ExecuteScalar();
-                return result != null ? Convert.ToInt32(result) : -1;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        AppState.clientId = Convert.ToInt32(reader["ClientID"]);
+                        return Convert.ToInt32(reader["PlanID"]);
+                    }
+                }
             }
+            return -1;
         }
 
         //method for LoadTasks

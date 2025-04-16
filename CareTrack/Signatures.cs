@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,15 @@ namespace CareTrack
         private int careplanId;
         private List<int>? taskIds;
         private List<string>? taskDescriptions;
+
+        //collecting signatures. 
+        private byte[]? clientSignatureData = null;
+        private byte[]? caregiverSignatureData = null;
+        private string caregiverSignatureType = "";
+        private string caregiverTypedText = "";
+        private string notes = "";
+        private int shiftId;
+
 
 
 
@@ -147,22 +157,141 @@ namespace CareTrack
             this.Hide();
         }
 
+
+
+        //client signature
         private void btnClientSign_Click(object sender, EventArgs e)
-
-
         {
-            ClientsSignatureForm clientSignature = new ClientsSignatureForm();
-            clientSignature.Show();
-            this.Hide(); // or this.Close() if you want to fully close it
+            using (ClientsSignatureForm clientSignature = new ClientsSignatureForm()) 
+            {
+                if (clientSignature.ShowDialog() == DialogResult.OK)
+                {
+                    clientSignatureData = clientSignature.SignatureData;
+                }
+            }
         }
 
-       
 
+        //caregiver signature
         private void btnCaregiverSign_Click_1(object sender, EventArgs e)
         {
-            CaregiverSignatureForm caregiverSignature = new CaregiverSignatureForm();
-            caregiverSignature.Show();
-            this.Hide(); // or this.Close() if needed
+            using (CaregiverSignatureForm caregiverSignature = new CaregiverSignatureForm()) 
+            {
+                if (caregiverSignature.ShowDialog() == DialogResult.OK)
+                {
+                    caregiverSignatureData = caregiverSignature.SignatureData;
+                    caregiverSignatureType = caregiverSignature.SignatureType;
+                    caregiverTypedText = caregiverSignature.TypedSignatureText;
+                }
+            }
+        }
+
+        //submit button
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (clientSignatureData == null)
+            { 
+                MessageBox.Show("Client signature is missing");
+                return;
+            }
+            if (caregiverSignatureData == null)
+            {
+                MessageBox.Show("Caregiver signature is missing.");
+                return;
+            }
+            notes = richTextBox1.Text.Trim();
+
+            //set shiftId
+            DatabaseHelper db = new DatabaseHelper();
+            shiftId = GetOrCreateShiftId(db, AppState.clientId, caregiverId);
+
+            SaveToDatabase();
+            MessageBox.Show("Service log has been submitted!");
+        }
+
+        //method for GetOrCreateShiftId
+        private int GetOrCreateShiftId(DatabaseHelper db, int clientId, int caregiverId)
+        {
+            using (SqlConnection conn = db.OpenConnection())
+            {
+                string GetOrCreateShiftIdQuery = "SELECT ShiftID FROM Shifts_Assignment WHERE ClientID = @ClientID AND CaregiverID = @CaregiverID";
+                using (SqlCommand GetOrCreateShiftIdCmd = new SqlCommand(GetOrCreateShiftIdQuery, conn))
+                {
+                    GetOrCreateShiftIdCmd.Parameters.AddWithValue("@ClientID", AppState.clientId);
+                    GetOrCreateShiftIdCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+
+                    object result = GetOrCreateShiftIdCmd.ExecuteScalar();
+                    int existingShiftId;
+                    if (result != null && int.TryParse(result.ToString(), out existingShiftId))
+                    {
+                        return existingShiftId;
+                    }
+                }
+                string insertQuery = @"INSERT INTO Shifts_Assignment(ClientID, CaregiverID, shift_date,status)
+                                    OUTPUT INSERTED.ShiftID VALUES (@ClientID, @CaregiverID, @Date, @Status)";
+
+                using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                {
+                insertCmd.Parameters.AddWithValue("@ClientID", AppState.clientId);
+                insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+                insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
+                insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
+
+                return (int)insertCmd.ExecuteScalar();
+                }
+        }
+    }
+
+        //method to save to database
+        private void SaveToDatabase()
+        {
+            DatabaseHelper db = new DatabaseHelper();
+            DateTime now = DateTime.Now;
+
+            string tasksPerformed = string.Join(Environment.NewLine, taskDescriptions ?? new List<string>());
+
+
+            using (SqlConnection conn = db.OpenConnection())
+            {
+                string SaveToDatabaseQuery = @"INSERT INTO Service_Logs (
+                                             CaregiverID, ClientID, ShiftID, date_time, tasks_performed, notes,
+                                             caregiver_signature, client_signature, SignedBy, SignatureType,
+                                             TypedSignatureText, SignedDate
+                                             ) VALUES (
+                                             @CaregiverID, @ClientID, @ShiftID, @DateTime, @TasksPerformed, @Notes,
+                                             @caregiver_signature, @client_signature, @SignedBy, @SignatureType,
+                                             @TypedSignatureText, @SignedDate
+                                             )";
+
+                using (SqlCommand cmd = new SqlCommand(SaveToDatabaseQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+                    cmd.Parameters.AddWithValue("@ClientID", AppState.clientId);
+                    cmd.Parameters.AddWithValue("@ShiftID", shiftId);
+                    cmd.Parameters.AddWithValue("@DateTime", now);
+                    cmd.Parameters.AddWithValue("@TasksPerformed", tasksPerformed);
+                    cmd.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(notes) ? "No additional notes." : notes);
+                    cmd.Parameters.AddWithValue("@caregiver_signature", caregiverSignatureData);
+                    cmd.Parameters.AddWithValue("@client_signature", clientSignatureData);
+                    cmd.Parameters.AddWithValue("@SignedBy", "Caregiver");
+                    cmd.Parameters.AddWithValue("@SignatureType", caregiverSignatureType);
+                    cmd.Parameters.AddWithValue("@TypedSignatureText", (object?)caregiverTypedText ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SignedDate", now);
+
+
+                    MessageBox.Show("Attempting to insert into Service_Logs...");
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Insert successful");
+                    }
+                    catch (Exception ex) 
+                    {
+                        MessageBox.Show("Insert failed: " + ex.Message);
+                    }
+
+                }
+            }
         }
     }
 }

@@ -12,9 +12,10 @@ namespace CareTrack
 {
     public partial class PopSuccessForm : Form
     {
-        public PopSuccessForm()
+        public PopSuccessForm(string message)
         {
             InitializeComponent();
+            PopSuccessTextBox.Text = message;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -25,6 +26,12 @@ namespace CareTrack
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

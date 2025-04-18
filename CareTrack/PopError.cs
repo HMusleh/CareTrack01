@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace CareTrack
 {
-    public partial class PopErrorForm: Form
+    public partial class PopErrorForm : Form
     {
-        public PopErrorForm()
+        public PopErrorForm(string message)
         {
             InitializeComponent();
+            PopErrorTextBox.Text = message;
+
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

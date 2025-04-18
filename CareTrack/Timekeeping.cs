@@ -107,7 +107,8 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                MessageBox.Show("Please complete the assigned tasks before accessing the Notes and Signatures page.", "Access Denied");
+                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                errorPopup.ShowDialog();
                 return;
             }
             Signatures s = new Signatures
@@ -174,11 +175,13 @@ namespace CareTrack
                     cmd.ExecuteNonQuery();
                 }
                 //message box for successful clocking in with time
-                MessageBox.Show($"Clock-In at {now}", "Successful Clock-In");
+                PopSuccessForm successPopup = new PopSuccessForm($"Clock-In at {now}");
+                successPopup.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Clock-In Failed: ", ex.Message);
+                PopErrorForm errorPopup = new PopErrorForm("Clock-In Failed: " + ex.Message);
+                errorPopup.ShowDialog();
             }
         }
 
@@ -206,17 +209,20 @@ namespace CareTrack
                     //pop up for clock out
                     if (rowsAffected > 0)
                     {
-                        MessageBox.Show($"Clock-Out at {now}", "Clock-Out Successful");
+                        PopSuccessForm successPopup = new PopSuccessForm($"Clock-Out at {now}");
+                        successPopup.ShowDialog();
                     }
                     else
                     {
-                        MessageBox.Show("No Clock-In Found to Clock-Out.", "Clock-Out Unsuccessful");
+                        PopErrorForm errorPopup = new PopErrorForm("No Clock-In Found to Clock-Out.");
+                        errorPopup.ShowDialog();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Clock-Out Failed: " + ex.Message);
+                PopErrorForm errorPopup = new PopErrorForm("Clock-Out Failed: " + ex.Message);
+                errorPopup.ShowDialog();
             }
         }
     }

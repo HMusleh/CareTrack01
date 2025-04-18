@@ -108,21 +108,28 @@ namespace CareTrack
                         int caregiverId = Convert.ToInt32(idresult);
 
                         //pop up boxes of success or failure
-                        MessageBox.Show("Welcome, " + username + "!" + " Login Successful");
-                        //passing username and caregiverid to homepage
-                        HomePage home = new HomePage(username, caregiverId);
-                        home.Show();
-                        this.Hide();
+                        PopSuccessForm successPopup = new PopSuccessForm("Welcome, " + username + "!" + " Login Successful");
+                        DialogResult resultPopup = successPopup.ShowDialog();
+                        
+                        if(resultPopup == DialogResult.OK)
+                        {
+                            HomePage home = new HomePage(username, caregiverId);
+                            home.Show();
+                            this.Hide();
+                        }
+                        
                     }
                     else
                     {
-                        MessageBox.Show("Invalid Username or Password");
+                       PopErrorForm errorPopup = new PopErrorForm("Invalid Username or Password");
+                        errorPopup.ShowDialog();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Database error: " + ex.Message);
+                PopErrorForm errorPopup = new PopErrorForm("Database error: " + ex.Message);
+                errorPopup.ShowDialog();
             }
         }
 

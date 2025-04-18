@@ -19,7 +19,7 @@ namespace CareTrack
         private int careplanId;
         private DatabaseHelper db = new DatabaseHelper();
         private List<CheckBox> tasksCheckBoxes = new List<CheckBox>();
-
+        
 
         private bool isMenuExpanded = false;
 
@@ -41,7 +41,8 @@ namespace CareTrack
             }
             else
             {
-                MessageBox.Show("No care plan for today.");
+                PopWarning warningPopup = new PopWarning("No care plan for today.");
+                warningPopup.ShowDialog();
                 button1.Enabled = false;
             }
             button1.Click += button1_Click;
@@ -119,7 +120,8 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                MessageBox.Show("Please complete the assigned tasks before accessing the Notes and Signatures page.", "Access Denied");
+                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                errorPopup.ShowDialog();
                 return;
             }
             Signatures s = new Signatures
@@ -177,6 +179,7 @@ namespace CareTrack
         private void LoadTasks(int planId)
    
         {
+            
             //local list
             List<(int TaskID, string Description)> taskList = new List<(int TaskID, string Description)>();
 
@@ -306,7 +309,8 @@ namespace CareTrack
             }
             else
             {
-                MessageBox.Show("Progress has been saved. Must complete all tasks to continue to notes and signature page.", "Incomplete Tasks");
+                PopWarning warningPopup = new PopWarning("Progress has been saved. Must complete all tasks to continue to notes and signature page.");
+                warningPopup.ShowDialog();            
             }
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

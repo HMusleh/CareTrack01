@@ -127,7 +127,8 @@ namespace CareTrack
         {
             if(!AppState.TasksCompleted)
             {
-                MessageBox.Show("Please complete the assigned tasks before accessing the Notes and Signatures page.", "Access Denied");
+                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                errorPopup.ShowDialog();
                 return;
             }
             Signatures s = new Signatures

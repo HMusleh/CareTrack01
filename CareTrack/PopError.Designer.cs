@@ -28,55 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShiftManagerForm));
-            richTextBox1 = new RichTextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopErrorForm));
+            PopErrorTextBox = new RichTextBox();
             pictureBox1 = new PictureBox();
-            button1 = new Button();
+            btnOK = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // richTextBox1
+            // PopErrorTextBox
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(118, 119);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(381, 100);
-            richTextBox1.TabIndex = 8;
-            richTextBox1.Text = "";
+            PopErrorTextBox.BorderStyle = BorderStyle.None;
+            PopErrorTextBox.Location = new Point(135, 159);
+            PopErrorTextBox.Margin = new Padding(3, 4, 3, 4);
+            PopErrorTextBox.Name = "PopErrorTextBox";
+            PopErrorTextBox.Size = new Size(435, 133);
+            PopErrorTextBox.TabIndex = 8;
+            PopErrorTextBox.Text = "";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 119);
+            pictureBox1.Location = new Point(14, 159);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // btnOK
             // 
-            button1.BackColor = Color.LightCoral;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(181, 266);
-            button1.Name = "button1";
-            button1.Size = new Size(254, 35);
-            button1.TabIndex = 9;
-            button1.Text = "OK";
-            button1.UseVisualStyleBackColor = false;
+            btnOK.BackColor = Color.LightCoral;
+            btnOK.FlatAppearance.BorderSize = 0;
+            btnOK.FlatStyle = FlatStyle.Flat;
+            btnOK.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOK.Location = new Point(207, 355);
+            btnOK.Margin = new Padding(3, 4, 3, 4);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new Size(290, 47);
+            btnOK.TabIndex = 9;
+            btnOK.Text = "OK";
+            btnOK.UseVisualStyleBackColor = false;
+            btnOK.Click += btnOK_Click;
             // 
-            // Form1
+            // PopErrorForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(616, 339);
-            Controls.Add(button1);
-            Controls.Add(richTextBox1);
+            ClientSize = new Size(704, 452);
+            Controls.Add(btnOK);
+            Controls.Add(PopErrorTextBox);
             Controls.Add(pictureBox1);
-            Name = "Form1";
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "PopErrorForm";
             Text = "Error";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -85,8 +90,8 @@
 
         #endregion
 
-        private RichTextBox richTextBox1;
+        private RichTextBox PopErrorTextBox;
         private PictureBox pictureBox1;
-        private Button button1;
+        private Button btnOK;
     }
 }

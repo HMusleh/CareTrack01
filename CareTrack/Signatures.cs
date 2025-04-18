@@ -118,7 +118,8 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                MessageBox.Show("Please complete the assigned tasks before accessing the Notes and Signatures page.", "Access Denied");
+                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                errorPopup.ShowDialog();
                 return;
             }
             Signatures s = new Signatures
@@ -191,12 +192,14 @@ namespace CareTrack
         {
             if (clientSignatureData == null)
             { 
-                MessageBox.Show("Client signature is missing");
+                PopErrorForm errorPopup = new PopErrorForm("Client signature is missing");
+                errorPopup.ShowDialog();
                 return;
             }
             if (caregiverSignatureData == null)
             {
-                MessageBox.Show("Caregiver signature is missing.");
+                PopErrorForm errorPopup = new PopErrorForm("Caregiver signature is missing.");
+                errorPopup.ShowDialog();
                 return;
             }
             notes = richTextBox1.Text.Trim();
@@ -206,7 +209,8 @@ namespace CareTrack
             shiftId = GetOrCreateShiftId(db, AppState.clientId, caregiverId);
 
             SaveToDatabase();
-            MessageBox.Show("Service log has been submitted!");
+            PopSuccessForm successPopup = new PopSuccessForm("Service log has been submitted!");
+            successPopup.ShowDialog();
         }
 
         //method for GetOrCreateShiftId
@@ -279,15 +283,17 @@ namespace CareTrack
                     cmd.Parameters.AddWithValue("@SignedDate", now);
 
 
-                    MessageBox.Show("Attempting to insert into Service_Logs...");
+                 
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Insert successful");
+                        PopSuccessForm successPopup = new PopSuccessForm("Insert successful");
+                        successPopup.ShowDialog();
                     }
                     catch (Exception ex) 
                     {
-                        MessageBox.Show("Insert failed: " + ex.Message);
+                        PopErrorForm errorPopup = new PopErrorForm("Insert failed: " + ex.Message);
+                        errorPopup.ShowDialog();
                     }
 
                 }

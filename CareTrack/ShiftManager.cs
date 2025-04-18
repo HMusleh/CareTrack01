@@ -35,6 +35,7 @@ namespace CareTrack
             //where the caregiverId will be used.
             WeeklySchedule();
 
+            
         }
 
         //Methods for the drop down menu
@@ -108,7 +109,8 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                MessageBox.Show("Please complete the assigned tasks before accessing the Notes and Signatures page.", "Access Denied");
+               PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                errorPopup.ShowDialog();
                 return;
             }
             Signatures s = new Signatures
@@ -140,7 +142,7 @@ namespace CareTrack
 
         private void WeeklySchedule()
         {
-
+            
 
             //each day to the label
             Dictionary<DayOfWeek, Label> dayLabels = new Dictionary<DayOfWeek, Label>
@@ -211,13 +213,15 @@ namespace CareTrack
 
                     if (!found)
                     {
-                        MessageBox.Show("No shifts found for this week.");
+                        PopErrorForm errorPopup = new PopErrorForm("No shifts found for this week.");
+                        errorPopup.ShowDialog();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Loading Scheduel: " + ex.Message);
+                PopErrorForm errorPopup = new PopErrorForm("Error Loading Scheduel: " + ex.Message);
+                errorPopup.ShowDialog();
             }
         }
         private void label3_Click(object sender, EventArgs e)

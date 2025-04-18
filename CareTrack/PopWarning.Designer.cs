@@ -29,68 +29,75 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopWarning));
-            button1 = new Button();
-            richTextBox1 = new RichTextBox();
+            btnContinueWarning = new Button();
+            PopWarningTextBox = new RichTextBox();
             pictureBox1 = new PictureBox();
-            button2 = new Button();
+            btnCancelWarning = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnContinueWarning
             // 
-            button1.BackColor = Color.LightCoral;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(181, 237);
-            button1.Name = "button1";
-            button1.Size = new Size(254, 35);
-            button1.TabIndex = 5;
-            button1.Text = "Continue";
-            button1.UseVisualStyleBackColor = false;
+            btnContinueWarning.BackColor = Color.LightCoral;
+            btnContinueWarning.FlatAppearance.BorderSize = 0;
+            btnContinueWarning.FlatStyle = FlatStyle.Flat;
+            btnContinueWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnContinueWarning.Location = new Point(207, 316);
+            btnContinueWarning.Margin = new Padding(3, 4, 3, 4);
+            btnContinueWarning.Name = "btnContinueWarning";
+            btnContinueWarning.Size = new Size(290, 47);
+            btnContinueWarning.TabIndex = 5;
+            btnContinueWarning.Text = "Continue";
+            btnContinueWarning.UseVisualStyleBackColor = false;
+            btnContinueWarning.Click += btnContinueWarning_Click;
             // 
-            // richTextBox1
+            // PopWarningTextBox
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(118, 119);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(381, 96);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
+            PopWarningTextBox.BorderStyle = BorderStyle.None;
+            PopWarningTextBox.Location = new Point(135, 159);
+            PopWarningTextBox.Margin = new Padding(3, 4, 3, 4);
+            PopWarningTextBox.Name = "PopWarningTextBox";
+            PopWarningTextBox.Size = new Size(435, 128);
+            PopWarningTextBox.TabIndex = 4;
+            PopWarningTextBox.Text = "";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 119);
+            pictureBox1.Location = new Point(14, 159);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
-            // button2
+            // btnCancelWarning
             // 
-            button2.BackColor = Color.LightGray;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(181, 292);
-            button2.Name = "button2";
-            button2.Size = new Size(254, 35);
-            button2.TabIndex = 6;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = false;
+            btnCancelWarning.BackColor = Color.LightGray;
+            btnCancelWarning.FlatAppearance.BorderSize = 0;
+            btnCancelWarning.FlatStyle = FlatStyle.Flat;
+            btnCancelWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCancelWarning.Location = new Point(207, 389);
+            btnCancelWarning.Margin = new Padding(3, 4, 3, 4);
+            btnCancelWarning.Name = "btnCancelWarning";
+            btnCancelWarning.Size = new Size(290, 47);
+            btnCancelWarning.TabIndex = 6;
+            btnCancelWarning.Text = "Cancel";
+            btnCancelWarning.UseVisualStyleBackColor = false;
+            btnCancelWarning.Click += btnCancelWarning_Click;
             // 
             // PopWarning
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(616, 339);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(richTextBox1);
+            ClientSize = new Size(704, 452);
+            Controls.Add(btnCancelWarning);
+            Controls.Add(btnContinueWarning);
+            Controls.Add(PopWarningTextBox);
             Controls.Add(pictureBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PopWarning";
             Text = "Warning!";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -100,9 +107,9 @@
 
         #endregion
 
-        private Button button1;
-        private RichTextBox richTextBox1;
+        private Button btnContinueWarning;
+        private RichTextBox PopWarningTextBox;
         private PictureBox pictureBox1;
-        private Button button2;
+        private Button btnCancelWarning;
     }
 }

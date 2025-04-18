@@ -39,7 +39,8 @@ namespace CareTrack
             {
                 if (strokes.Count == 0 || strokes.All(s => s.Count < 2))
                 {
-                    MessageBox.Show("Please sign here before saving.", "Missing Signature", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    PopWarning warningPopup = new PopWarning("Please sign here before saving.");
+                    warningPopup.ShowDialog();
                     return;
                 }
 
@@ -50,7 +51,8 @@ namespace CareTrack
             {
                 if (string.IsNullOrWhiteSpace(txtTypedSignature.Text))
                 {
-                    MessageBox.Show("Please sign here before saving.", "Missing Signature", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    PopWarning warningPopup = new PopWarning("Please sign here before saving.");
+                    warningPopup.ShowDialog();
                     return;
                 }
 
@@ -59,9 +61,13 @@ namespace CareTrack
 
             SignatureData = signatureData;
 
-            MessageBox.Show("Signature saved successfully!");
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            PopSuccessForm successPopup = new PopSuccessForm("Signature saved successfully!");
+            DialogResult result = successPopup.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)

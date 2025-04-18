@@ -12,9 +12,22 @@ namespace CareTrack
 {
     public partial class PopWarning : Form
     {
-        public PopWarning()
+        public PopWarning(string message)
         {
             InitializeComponent();
+            PopWarningTextBox.Text = message;
+        }
+
+        private void btnContinueWarning_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btnCancelWarning_Click(object sender, EventArgs e)
+        {
+            this .DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

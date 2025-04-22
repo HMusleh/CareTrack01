@@ -47,6 +47,7 @@
             // 
             // PopSuccessTextBox
             // 
+            PopSuccessTextBox.BackColor = Color.White;
             PopSuccessTextBox.BorderStyle = BorderStyle.None;
             PopSuccessTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PopSuccessTextBox.Location = new Point(181, 165);

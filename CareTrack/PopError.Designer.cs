@@ -37,6 +37,7 @@
             // 
             // PopErrorTextBox
             // 
+            PopErrorTextBox.BackColor = Color.White;
             PopErrorTextBox.BorderStyle = BorderStyle.None;
             PopErrorTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PopErrorTextBox.Location = new Point(181, 160);

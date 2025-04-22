@@ -42,7 +42,7 @@
             btnContinueWarning.FlatAppearance.BorderSize = 0;
             btnContinueWarning.FlatStyle = FlatStyle.Flat;
             btnContinueWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinueWarning.Location = new Point(181, 237);
+            btnContinueWarning.Location = new Point(30, 292);
             btnContinueWarning.Name = "btnContinueWarning";
             btnContinueWarning.Size = new Size(254, 35);
             btnContinueWarning.TabIndex = 5;
@@ -52,12 +52,13 @@
             // 
             // PopWarningTextBox
             // 
+            PopWarningTextBox.BackColor = Color.White;
             PopWarningTextBox.BorderStyle = BorderStyle.None;
             PopWarningTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PopWarningTextBox.Location = new Point(181, 119);
+            PopWarningTextBox.Location = new Point(143, 165);
             PopWarningTextBox.Name = "PopWarningTextBox";
             PopWarningTextBox.ReadOnly = true;
-            PopWarningTextBox.Size = new Size(423, 96);
+            PopWarningTextBox.Size = new Size(461, 96);
             PopWarningTextBox.TabIndex = 4;
             PopWarningTextBox.Text = "";
             // 
@@ -77,7 +78,7 @@
             btnCancelWarning.FlatAppearance.BorderSize = 0;
             btnCancelWarning.FlatStyle = FlatStyle.Flat;
             btnCancelWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCancelWarning.Location = new Point(181, 292);
+            btnCancelWarning.Location = new Point(326, 292);
             btnCancelWarning.Name = "btnCancelWarning";
             btnCancelWarning.Size = new Size(254, 35);
             btnCancelWarning.TabIndex = 6;

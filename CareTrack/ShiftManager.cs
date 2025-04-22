@@ -35,7 +35,7 @@ namespace CareTrack
             //where the caregiverId will be used.
             WeeklySchedule();
 
-            
+
         }
 
         //Methods for the drop down menu
@@ -43,9 +43,11 @@ namespace CareTrack
         private void CollapseMenu()
         {
             btnHome.Visible = false;
-            btnTasks.Visible = false;
             btnTimeKeeping.Visible = false;
+            btnSchedule.Visible = false;
+            btnTasks.Visible = false;
             btnNotes.Visible = false;
+            btnHelp.Visible = false;
             btnLogOut.Visible = false;
 
             panelMenu.Height = btnDropDownMenu.Height;
@@ -59,9 +61,11 @@ namespace CareTrack
         private void ExpandMenu()
         {
             btnHome.Visible = true;
-            btnTasks.Visible = true;
             btnTimeKeeping.Visible = true;
+            btnSchedule.Visible = true;
+            btnTasks.Visible = true;
             btnNotes.Visible = true;
+            btnHelp.Visible = true;
             btnLogOut.Visible = true;
 
 
@@ -109,7 +113,7 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-               PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
                 errorPopup.ShowDialog();
                 return;
             }
@@ -142,7 +146,7 @@ namespace CareTrack
 
         private void WeeklySchedule()
         {
-            
+
 
             //each day to the label
             Dictionary<DayOfWeek, Label> dayLabels = new Dictionary<DayOfWeek, Label>
@@ -250,6 +254,11 @@ namespace CareTrack
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShiftManagerForm_Load(object sender, EventArgs e)
         {
 
         }

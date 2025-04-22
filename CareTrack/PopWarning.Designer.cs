@@ -42,10 +42,9 @@
             btnContinueWarning.FlatAppearance.BorderSize = 0;
             btnContinueWarning.FlatStyle = FlatStyle.Flat;
             btnContinueWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinueWarning.Location = new Point(207, 316);
-            btnContinueWarning.Margin = new Padding(3, 4, 3, 4);
+            btnContinueWarning.Location = new Point(181, 237);
             btnContinueWarning.Name = "btnContinueWarning";
-            btnContinueWarning.Size = new Size(290, 47);
+            btnContinueWarning.Size = new Size(254, 35);
             btnContinueWarning.TabIndex = 5;
             btnContinueWarning.Text = "Continue";
             btnContinueWarning.UseVisualStyleBackColor = false;
@@ -54,18 +53,17 @@
             // PopWarningTextBox
             // 
             PopWarningTextBox.BorderStyle = BorderStyle.None;
-            PopWarningTextBox.Location = new Point(135, 159);
-            PopWarningTextBox.Margin = new Padding(3, 4, 3, 4);
+            PopWarningTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PopWarningTextBox.Location = new Point(181, 119);
             PopWarningTextBox.Name = "PopWarningTextBox";
-            PopWarningTextBox.Size = new Size(435, 128);
+            PopWarningTextBox.Size = new Size(254, 96);
             PopWarningTextBox.TabIndex = 4;
             PopWarningTextBox.Text = "";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(14, 159);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(12, 119);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -78,10 +76,9 @@
             btnCancelWarning.FlatAppearance.BorderSize = 0;
             btnCancelWarning.FlatStyle = FlatStyle.Flat;
             btnCancelWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCancelWarning.Location = new Point(207, 389);
-            btnCancelWarning.Margin = new Padding(3, 4, 3, 4);
+            btnCancelWarning.Location = new Point(181, 292);
             btnCancelWarning.Name = "btnCancelWarning";
-            btnCancelWarning.Size = new Size(290, 47);
+            btnCancelWarning.Size = new Size(254, 35);
             btnCancelWarning.TabIndex = 6;
             btnCancelWarning.Text = "Cancel";
             btnCancelWarning.UseVisualStyleBackColor = false;
@@ -89,16 +86,18 @@
             // 
             // PopWarning
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(704, 452);
+            ClientSize = new Size(616, 339);
             Controls.Add(btnCancelWarning);
             Controls.Add(btnContinueWarning);
             Controls.Add(PopWarningTextBox);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(632, 378);
+            MinimumSize = new Size(632, 378);
             Name = "PopWarning";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Warning!";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

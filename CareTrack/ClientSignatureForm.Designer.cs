@@ -49,39 +49,44 @@
             // lblClients
             // 
             lblClients.AutoSize = true;
-            lblClients.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblClients.Location = new Point(30, 20);
+            lblClients.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblClients.Location = new Point(169, 18);
             lblClients.Name = "lblClients";
-            lblClients.Size = new Size(284, 31);
+            lblClients.Size = new Size(302, 33);
             lblClients.TabIndex = 4;
             lblClients.Text = "Clients Signature Form";
             lblClients.TextAlign = ContentAlignment.TopCenter;
+            lblClients.Click += lblClients_Click;
             // 
             // btnSaveSignature
             // 
-            btnSaveSignature.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSaveSignature.Location = new Point(50, 280);
+            btnSaveSignature.BackColor = Color.FromArgb(255, 128, 128);
+            btnSaveSignature.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSaveSignature.Location = new Point(129, 299);
             btnSaveSignature.Name = "btnSaveSignature";
             btnSaveSignature.Size = new Size(135, 30);
             btnSaveSignature.TabIndex = 6;
             btnSaveSignature.Text = "Save Signature";
+            btnSaveSignature.UseVisualStyleBackColor = false;
             btnSaveSignature.Click += btnSaveSignature_Click;
             // 
             // btnClear
             // 
+            btnClear.BackColor = Color.FromArgb(255, 128, 128);
             btnClear.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnClear.Location = new Point(300, 280);
+            btnClear.Location = new Point(378, 299);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(135, 30);
             btnClear.TabIndex = 7;
             btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
             btnClear.Click += btnClear_Click;
             // 
             // radioDraw
             // 
             radioDraw.Checked = true;
-            radioDraw.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            radioDraw.Location = new Point(50, 70);
+            radioDraw.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            radioDraw.Location = new Point(129, 70);
             radioDraw.Name = "radioDraw";
             radioDraw.Size = new Size(104, 24);
             radioDraw.TabIndex = 0;
@@ -91,8 +96,8 @@
             // 
             // radioType
             // 
-            radioType.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            radioType.Location = new Point(300, 70);
+            radioType.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            radioType.Location = new Point(424, 70);
             radioType.Name = "radioType";
             radioType.Size = new Size(104, 24);
             radioType.TabIndex = 1;
@@ -103,7 +108,7 @@
             // 
             signaturePanel.BackColor = Color.White;
             signaturePanel.BorderStyle = BorderStyle.FixedSingle;
-            signaturePanel.Location = new Point(20, 100);
+            signaturePanel.Location = new Point(113, 146);
             signaturePanel.Name = "signaturePanel";
             signaturePanel.Size = new Size(415, 126);
             signaturePanel.TabIndex = 2;
@@ -116,10 +121,10 @@
             // 
             txtTypedSignature.Font = new Font("Times New Roman", 21.75F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
             txtTypedSignature.ForeColor = SystemColors.WindowText;
-            txtTypedSignature.Location = new Point(20, 100);
+            txtTypedSignature.Location = new Point(113, 100);
             txtTypedSignature.Multiline = true;
             txtTypedSignature.Name = "txtTypedSignature";
-            txtTypedSignature.Size = new Size(400, 40);
+            txtTypedSignature.Size = new Size(415, 40);
             txtTypedSignature.TabIndex = 3;
             txtTypedSignature.TextAlign = HorizontalAlignment.Center;
             txtTypedSignature.Visible = false;
@@ -128,7 +133,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(641, 744);
+            BackColor = Color.White;
+            ClientSize = new Size(641, 352);
             Controls.Add(radioDraw);
             Controls.Add(radioType);
             Controls.Add(signaturePanel);
@@ -136,6 +142,8 @@
             Controls.Add(lblClients);
             Controls.Add(btnSaveSignature);
             Controls.Add(btnClear);
+            MaximumSize = new Size(657, 391);
+            MinimumSize = new Size(657, 391);
             Name = "ClientsSignatureForm";
             Text = "ClientsSignature";
             ResumeLayout(false);

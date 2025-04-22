@@ -51,9 +51,11 @@ namespace CareTrack
         private void CollapseMenu()
         {
             btnHome.Visible = false;
-            btnTasks.Visible = false;
             btnTimeKeeping.Visible = false;
+            btnSchedule.Visible = false;
+            btnTasks.Visible = false;
             btnNotes.Visible = false;
+            btnHelp.Visible = false;
             btnLogOut.Visible = false;
 
             panelMenu.Height = btnDropDownMenu.Height;
@@ -67,9 +69,11 @@ namespace CareTrack
         private void ExpandMenu()
         {
             btnHome.Visible = true;
-            btnTasks.Visible = true;
             btnTimeKeeping.Visible = true;
+            btnSchedule.Visible = true;
+            btnTasks.Visible = true;
             btnNotes.Visible = true;
+            btnHelp.Visible = true;
             btnLogOut.Visible = true;
 
 
@@ -163,7 +167,7 @@ namespace CareTrack
         //client signature
         private void btnClientSign_Click(object sender, EventArgs e)
         {
-            using (ClientsSignatureForm clientSignature = new ClientsSignatureForm()) 
+            using (ClientsSignatureForm clientSignature = new ClientsSignatureForm())
             {
                 if (clientSignature.ShowDialog() == DialogResult.OK)
                 {
@@ -176,7 +180,7 @@ namespace CareTrack
         //caregiver signature
         private void btnCaregiverSign_Click_1(object sender, EventArgs e)
         {
-            using (CaregiverSignatureForm caregiverSignature = new CaregiverSignatureForm()) 
+            using (CaregiverSignatureForm caregiverSignature = new CaregiverSignatureForm())
             {
                 if (caregiverSignature.ShowDialog() == DialogResult.OK)
                 {
@@ -191,7 +195,7 @@ namespace CareTrack
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if (clientSignatureData == null)
-            { 
+            {
                 PopErrorForm errorPopup = new PopErrorForm("Client signature is missing");
                 errorPopup.ShowDialog();
                 return;
@@ -236,15 +240,15 @@ namespace CareTrack
 
                 using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
                 {
-                insertCmd.Parameters.AddWithValue("@ClientID", AppState.clientId);
-                insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
-                insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
-                insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
+                    insertCmd.Parameters.AddWithValue("@ClientID", AppState.clientId);
+                    insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+                    insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
+                    insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
 
-                return (int)insertCmd.ExecuteScalar();
+                    return (int)insertCmd.ExecuteScalar();
                 }
+            }
         }
-    }
 
         //method to save to database
         private void SaveToDatabase()
@@ -283,14 +287,14 @@ namespace CareTrack
                     cmd.Parameters.AddWithValue("@SignedDate", now);
 
 
-                 
+
                     try
                     {
                         cmd.ExecuteNonQuery();
                         PopSuccessForm successPopup = new PopSuccessForm("Insert successful");
                         successPopup.ShowDialog();
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
                         PopErrorForm errorPopup = new PopErrorForm("Insert failed: " + ex.Message);
                         errorPopup.ShowDialog();
@@ -298,6 +302,11 @@ namespace CareTrack
 
                 }
             }
+        }
+
+        private void Signatures_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

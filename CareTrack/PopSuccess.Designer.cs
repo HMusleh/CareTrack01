@@ -38,8 +38,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(14, 159);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(12, 119);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -49,10 +48,10 @@
             // PopSuccessTextBox
             // 
             PopSuccessTextBox.BorderStyle = BorderStyle.None;
-            PopSuccessTextBox.Location = new Point(135, 159);
-            PopSuccessTextBox.Margin = new Padding(3, 4, 3, 4);
+            PopSuccessTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PopSuccessTextBox.Location = new Point(181, 119);
             PopSuccessTextBox.Name = "PopSuccessTextBox";
-            PopSuccessTextBox.Size = new Size(435, 128);
+            PopSuccessTextBox.Size = new Size(254, 96);
             PopSuccessTextBox.TabIndex = 1;
             PopSuccessTextBox.Text = "";
             PopSuccessTextBox.TextChanged += richTextBox1_TextChanged;
@@ -63,10 +62,9 @@
             btnContinue.FlatAppearance.BorderSize = 0;
             btnContinue.FlatStyle = FlatStyle.Flat;
             btnContinue.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinue.Location = new Point(207, 356);
-            btnContinue.Margin = new Padding(3, 4, 3, 4);
+            btnContinue.Location = new Point(181, 267);
             btnContinue.Name = "btnContinue";
-            btnContinue.Size = new Size(290, 47);
+            btnContinue.Size = new Size(254, 35);
             btnContinue.TabIndex = 2;
             btnContinue.Text = "Continue";
             btnContinue.UseVisualStyleBackColor = false;
@@ -74,15 +72,17 @@
             // 
             // PopSuccessForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(704, 452);
+            ClientSize = new Size(616, 339);
             Controls.Add(btnContinue);
             Controls.Add(PopSuccessTextBox);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(632, 378);
+            MinimumSize = new Size(632, 378);
             Name = "PopSuccessForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Success!";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

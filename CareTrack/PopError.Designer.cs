@@ -38,18 +38,17 @@
             // PopErrorTextBox
             // 
             PopErrorTextBox.BorderStyle = BorderStyle.None;
-            PopErrorTextBox.Location = new Point(135, 159);
-            PopErrorTextBox.Margin = new Padding(3, 4, 3, 4);
+            PopErrorTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PopErrorTextBox.Location = new Point(181, 119);
             PopErrorTextBox.Name = "PopErrorTextBox";
-            PopErrorTextBox.Size = new Size(435, 133);
+            PopErrorTextBox.Size = new Size(254, 100);
             PopErrorTextBox.TabIndex = 8;
             PopErrorTextBox.Text = "";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(14, 159);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(12, 119);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -62,10 +61,9 @@
             btnOK.FlatAppearance.BorderSize = 0;
             btnOK.FlatStyle = FlatStyle.Flat;
             btnOK.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnOK.Location = new Point(207, 355);
-            btnOK.Margin = new Padding(3, 4, 3, 4);
+            btnOK.Location = new Point(181, 266);
             btnOK.Name = "btnOK";
-            btnOK.Size = new Size(290, 47);
+            btnOK.Size = new Size(254, 35);
             btnOK.TabIndex = 9;
             btnOK.Text = "OK";
             btnOK.UseVisualStyleBackColor = false;
@@ -73,15 +71,17 @@
             // 
             // PopErrorForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(704, 452);
+            ClientSize = new Size(616, 339);
             Controls.Add(btnOK);
             Controls.Add(PopErrorTextBox);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(632, 378);
+            MinimumSize = new Size(632, 378);
             Name = "PopErrorForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Error";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

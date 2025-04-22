@@ -13,7 +13,7 @@ using Azure.Identity;
 
 namespace CareTrack
 {
-   
+
     public partial class Timekeeping : Form
     {
 
@@ -22,18 +22,18 @@ namespace CareTrack
         private int caregiverId;
 
         private bool isMenuExpanded = false;
-        
+
         public Timekeeping(string username, int id)
         {
             InitializeComponent();
             btnTimeKeeping.Enabled = false;
             CollapseMenu();
-            
+
             //initializing the username and id components
             currentUser = username;
             caregiverId = id;
 
-            
+
         }
 
         //Methods for the drop down menu
@@ -41,9 +41,11 @@ namespace CareTrack
         private void CollapseMenu()
         {
             btnHome.Visible = false;
-            btnTasks.Visible = false;
             btnTimeKeeping.Visible = false;
+            btnSchedule.Visible = false;
+            btnTasks.Visible = false;
             btnNotes.Visible = false;
+            btnHelp.Visible = false;
             btnLogOut.Visible = false;
 
             panelMenu.Height = btnDropDownMenu.Height;
@@ -57,9 +59,11 @@ namespace CareTrack
         private void ExpandMenu()
         {
             btnHome.Visible = true;
-            btnTasks.Visible = true;
             btnTimeKeeping.Visible = true;
+            btnSchedule.Visible = true;
+            btnTasks.Visible = true;
             btnNotes.Visible = true;
+            btnHelp.Visible = true;
             btnLogOut.Visible = true;
 
 
@@ -188,7 +192,7 @@ namespace CareTrack
         //clock out button
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
             //realtime date
             DateTime now = DateTime.Now;
             string query = @"UPDATE TimePunches SET clock_out = @ClockOut WHERE CaregiverID = @CaregiverId AND clock_out IS NULL";
@@ -224,6 +228,11 @@ namespace CareTrack
                 PopErrorForm errorPopup = new PopErrorForm("Clock-Out Failed: " + ex.Message);
                 errorPopup.ShowDialog();
             }
+        }
+
+        private void Timekeeping_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

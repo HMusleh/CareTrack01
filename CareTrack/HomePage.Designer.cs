@@ -36,10 +36,13 @@ namespace CareTrack
             panelMenu = new FlowLayoutPanel();
             btnDropDownMenu = new Button();
             btnHome = new Button();
-            btnTasks = new Button();
             btnTimeKeeping = new Button();
+            btnSchedule = new Button();
+            btnTasks = new Button();
             btnNotes = new Button();
+            btnHelp = new Button();
             btnLogOut = new Button();
+            button1 = new Button();
             panelMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -47,10 +50,9 @@ namespace CareTrack
             // 
             btnViewTasks.BackColor = Color.FromArgb(255, 128, 128);
             btnViewTasks.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnViewTasks.Location = new Point(758, 352);
-            btnViewTasks.Margin = new Padding(3, 4, 3, 4);
+            btnViewTasks.Location = new Point(563, 265);
             btnViewTasks.Name = "btnViewTasks";
-            btnViewTasks.Size = new Size(594, 184);
+            btnViewTasks.Size = new Size(520, 138);
             btnViewTasks.TabIndex = 3;
             btnViewTasks.Text = "View Tasks";
             btnViewTasks.UseVisualStyleBackColor = false;
@@ -61,12 +63,11 @@ namespace CareTrack
             btnClockInOut.AutoSize = true;
             btnClockInOut.BackColor = Color.FromArgb(255, 128, 128);
             btnClockInOut.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnClockInOut.Location = new Point(758, 77);
-            btnClockInOut.Margin = new Padding(3, 4, 3, 4);
+            btnClockInOut.Location = new Point(563, 59);
             btnClockInOut.Name = "btnClockInOut";
-            btnClockInOut.Size = new Size(594, 184);
+            btnClockInOut.Size = new Size(520, 138);
             btnClockInOut.TabIndex = 0;
-            btnClockInOut.Text = "Clock In/Out";
+            btnClockInOut.Text = "Timekeeping";
             btnClockInOut.UseVisualStyleBackColor = false;
             btnClockInOut.Click += btnClockInOut_Click;
             // 
@@ -74,10 +75,9 @@ namespace CareTrack
             // 
             btnViewSchedule.BackColor = Color.FromArgb(255, 128, 128);
             btnViewSchedule.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnViewSchedule.Location = new Point(758, 627);
-            btnViewSchedule.Margin = new Padding(3, 4, 3, 4);
+            btnViewSchedule.Location = new Point(563, 471);
             btnViewSchedule.Name = "btnViewSchedule";
-            btnViewSchedule.Size = new Size(594, 184);
+            btnViewSchedule.Size = new Size(520, 138);
             btnViewSchedule.TabIndex = 4;
             btnViewSchedule.Text = "View Schedule";
             btnViewSchedule.UseVisualStyleBackColor = false;
@@ -85,22 +85,23 @@ namespace CareTrack
             // 
             // panelMenu
             // 
-            panelMenu.BackColor = Color.LightCoral;
-            panelMenu.Size = new Size(306, btnDropDownMenu.Height);
-            panelMenu.Location = new Point(this.ClientSize.Width - panelMenu.Width, 0);
-            panelMenu.Location = new Point(1414, 0);
-            panelMenu.Name = "panelMenu";
-            panelMenu.TabIndex = 6;
-            panelMenu.AutoSize = false;
             panelMenu.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panelMenu.FlowDirection = FlowDirection.TopDown;
-            panelMenu.WrapContents = false;
+            panelMenu.BackColor = Color.LightCoral;
             panelMenu.Controls.Add(btnDropDownMenu);
             panelMenu.Controls.Add(btnHome);
-            panelMenu.Controls.Add(btnTasks);
             panelMenu.Controls.Add(btnTimeKeeping);
+            panelMenu.Controls.Add(btnSchedule);
+            panelMenu.Controls.Add(btnTasks);
             panelMenu.Controls.Add(btnNotes);
+            panelMenu.Controls.Add(btnHelp);
             panelMenu.Controls.Add(btnLogOut);
+            panelMenu.FlowDirection = FlowDirection.TopDown;
+            panelMenu.Location = new Point(1237, 0);
+            panelMenu.Margin = new Padding(3, 2, 3, 2);
+            panelMenu.Name = "panelMenu";
+            panelMenu.Size = new Size(268, 94);
+            panelMenu.TabIndex = 6;
+            panelMenu.WrapContents = false;
             // 
             // btnDropDownMenu
             // 
@@ -110,7 +111,7 @@ namespace CareTrack
             btnDropDownMenu.Location = new Point(0, 0);
             btnDropDownMenu.Margin = new Padding(0);
             btnDropDownMenu.Name = "btnDropDownMenu";
-            btnDropDownMenu.Size = new Size(306, 125);
+            btnDropDownMenu.Size = new Size(268, 94);
             btnDropDownMenu.TabIndex = 0;
             btnDropDownMenu.UseVisualStyleBackColor = true;
             btnDropDownMenu.Click += btnDropDownMenu_Click;
@@ -123,34 +124,15 @@ namespace CareTrack
             btnHome.ForeColor = SystemColors.ActiveCaptionText;
             btnHome.Image = (Image)resources.GetObject("btnHome.Image");
             btnHome.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHome.Location = new Point(3, 129);
-            btnHome.Margin = new Padding(3, 4, 3, 4);
+            btnHome.Location = new Point(3, 97);
             btnHome.Name = "btnHome";
-            btnHome.Size = new Size(306, 108);
+            btnHome.Size = new Size(268, 81);
             btnHome.TabIndex = 6;
             btnHome.Tag = "Home";
             btnHome.Text = "          Home";
             btnHome.TextAlign = ContentAlignment.MiddleLeft;
             btnHome.UseVisualStyleBackColor = true;
             btnHome.Click += btnHome_Click;
-            // 
-            // btnTasks
-            // 
-            btnTasks.FlatAppearance.BorderSize = 0;
-            btnTasks.FlatStyle = FlatStyle.Flat;
-            btnTasks.Font = new Font("Century Gothic", 18F);
-            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
-            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTasks.Location = new Point(3, 245);
-            btnTasks.Margin = new Padding(3, 4, 3, 4);
-            btnTasks.Name = "btnTasks";
-            btnTasks.Size = new Size(306, 108);
-            btnTasks.TabIndex = 7;
-            btnTasks.Tag = "Tasks";
-            btnTasks.Text = "          Tasks";
-            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
-            btnTasks.UseVisualStyleBackColor = true;
-            btnTasks.Click += btnTasks_Click;
             // 
             // btnTimeKeeping
             // 
@@ -159,15 +141,47 @@ namespace CareTrack
             btnTimeKeeping.Font = new Font("Century Gothic", 18F);
             btnTimeKeeping.Image = (Image)resources.GetObject("btnTimeKeeping.Image");
             btnTimeKeeping.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTimeKeeping.Location = new Point(3, 361);
-            btnTimeKeeping.Margin = new Padding(3, 4, 3, 4);
+            btnTimeKeeping.Location = new Point(3, 184);
             btnTimeKeeping.Name = "btnTimeKeeping";
-            btnTimeKeeping.Size = new Size(306, 108);
+            btnTimeKeeping.Size = new Size(268, 81);
             btnTimeKeeping.TabIndex = 8;
             btnTimeKeeping.Tag = "Timekeeping";
             btnTimeKeeping.Text = "          Timekeeping";
             btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
             btnTimeKeeping.UseVisualStyleBackColor = true;
+            // 
+            // btnSchedule
+            // 
+            btnSchedule.FlatAppearance.BorderSize = 0;
+            btnSchedule.FlatStyle = FlatStyle.Flat;
+            btnSchedule.Font = new Font("Century Gothic", 18F);
+            btnSchedule.Image = (Image)resources.GetObject("btnSchedule.Image");
+            btnSchedule.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSchedule.Location = new Point(3, 271);
+            btnSchedule.Name = "btnSchedule";
+            btnSchedule.Size = new Size(268, 81);
+            btnSchedule.TabIndex = 12;
+            btnSchedule.Tag = "Notes";
+            btnSchedule.Text = "          Schedule";
+            btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
+            btnSchedule.UseVisualStyleBackColor = true;
+            // 
+            // btnTasks
+            // 
+            btnTasks.FlatAppearance.BorderSize = 0;
+            btnTasks.FlatStyle = FlatStyle.Flat;
+            btnTasks.Font = new Font("Century Gothic", 18F);
+            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
+            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
+            btnTasks.Location = new Point(3, 358);
+            btnTasks.Name = "btnTasks";
+            btnTasks.Size = new Size(268, 81);
+            btnTasks.TabIndex = 7;
+            btnTasks.Tag = "Tasks";
+            btnTasks.Text = "          Tasks";
+            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
+            btnTasks.UseVisualStyleBackColor = true;
+            btnTasks.Click += btnTasks_Click;
             // 
             // btnNotes
             // 
@@ -176,16 +190,31 @@ namespace CareTrack
             btnNotes.Font = new Font("Century Gothic", 18F);
             btnNotes.Image = (Image)resources.GetObject("btnNotes.Image");
             btnNotes.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNotes.Location = new Point(3, 477);
-            btnNotes.Margin = new Padding(3, 4, 3, 4);
+            btnNotes.Location = new Point(3, 445);
             btnNotes.Name = "btnNotes";
-            btnNotes.Size = new Size(306, 108);
+            btnNotes.Size = new Size(268, 81);
             btnNotes.TabIndex = 9;
             btnNotes.Tag = "Notes";
             btnNotes.Text = "          Notes";
             btnNotes.TextAlign = ContentAlignment.MiddleLeft;
             btnNotes.UseVisualStyleBackColor = true;
             btnNotes.Click += btnNotes_Click;
+            // 
+            // btnHelp
+            // 
+            btnHelp.FlatAppearance.BorderSize = 0;
+            btnHelp.FlatStyle = FlatStyle.Flat;
+            btnHelp.Font = new Font("Century Gothic", 18F);
+            btnHelp.Image = (Image)resources.GetObject("btnHelp.Image");
+            btnHelp.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHelp.Location = new Point(3, 532);
+            btnHelp.Name = "btnHelp";
+            btnHelp.Size = new Size(268, 81);
+            btnHelp.TabIndex = 11;
+            btnHelp.Tag = "Notes";
+            btnHelp.Text = "          Help";
+            btnHelp.TextAlign = ContentAlignment.MiddleLeft;
+            btnHelp.UseVisualStyleBackColor = true;
             // 
             // btnLogOut
             // 
@@ -194,10 +223,9 @@ namespace CareTrack
             btnLogOut.Font = new Font("Century Gothic", 18F);
             btnLogOut.Image = (Image)resources.GetObject("btnLogOut.Image");
             btnLogOut.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLogOut.Location = new Point(3, 593);
-            btnLogOut.Margin = new Padding(3, 4, 3, 4);
+            btnLogOut.Location = new Point(3, 619);
             btnLogOut.Name = "btnLogOut";
-            btnLogOut.Size = new Size(306, 108);
+            btnLogOut.Size = new Size(268, 81);
             btnLogOut.TabIndex = 10;
             btnLogOut.Tag = "Logout";
             btnLogOut.Text = "          Logout";
@@ -205,25 +233,38 @@ namespace CareTrack
             btnLogOut.UseVisualStyleBackColor = true;
             btnLogOut.Click += btnLogOut_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(128, 255, 255);
+            button1.Font = new Font("Century Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(12, 667);
+            button1.Name = "button1";
+            button1.Size = new Size(178, 58);
+            button1.TabIndex = 7;
+            button1.Text = "Help";
+            button1.UseVisualStyleBackColor = false;
+            // 
             // HomePage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1720, 888);
+            ClientSize = new Size(1505, 737);
+            Controls.Add(button1);
             Controls.Add(panelMenu);
             Controls.Add(btnViewSchedule);
             Controls.Add(btnViewTasks);
             Controls.Add(btnClockInOut);
             DoubleBuffered = true;
-            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(1521, 776);
+            MinimumSize = new Size(1521, 776);
             Name = "HomePage";
             RightToLeft = RightToLeft.No;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CT - Home";
+            Load += HomePage_Load;
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -251,5 +292,9 @@ namespace CareTrack
         private Button btnNotes;
         private Button btnTimeKeeping;
         private Button btnTasks;
+        private Button button1;
+        private Button button2;
+        private Button btnHelp;
+        private Button btnSchedule;
     }
 }

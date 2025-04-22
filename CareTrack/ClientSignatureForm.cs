@@ -157,67 +157,72 @@ namespace CareTrack
             }
         }
 
+        private void lblClients_Click(object sender, EventArgs e)
+        {
 
-     //Since signature page is taking care of the database portion these two are removed. I dashed them out 
-     //just in case you would still like to see what they were previously and commented what I changed.
-       // private void SaveSignatureToDatabase(byte[]? signatureData)
+        }
+
+
+        //Since signature page is taking care of the database portion these two are removed. I dashed them out 
+        //just in case you would still like to see what they were previously and commented what I changed.
+        // private void SaveSignatureToDatabase(byte[]? signatureData)
         //{
-         //   string connectionString = "Data Source=JAYLIN\\SQLEXPRESS;Initial Catalog=CareTrack Database;Integrated Security=True;TrustServerCertificate=True";
+        //   string connectionString = "Data Source=JAYLIN\\SQLEXPRESS;Initial Catalog=CareTrack Database;Integrated Security=True;TrustServerCertificate=True";
         //    int clientId = 1;
         //    int caregiverId = 1;
-       //     int shiftId = GetOrCreateShiftId(connectionString, clientId, caregiverId);
+        //     int shiftId = GetOrCreateShiftId(connectionString, clientId, caregiverId);
 
-       //     using (SqlConnection connection = new SqlConnection(connectionString))
+        //     using (SqlConnection connection = new SqlConnection(connectionString))
         //    {
-         //       connection.Open();
-          //      string query = "INSERT INTO Signatures (ClientID, CaregiverID, ShiftID, ClientSignature, SignatureTime) " +
-          //                     "VALUES (@ClientID, @CaregiverID, @ShiftID, @ClientSignature, GETDATE())";
+        //       connection.Open();
+        //      string query = "INSERT INTO Signatures (ClientID, CaregiverID, ShiftID, ClientSignature, SignatureTime) " +
+        //                     "VALUES (@ClientID, @CaregiverID, @ShiftID, @ClientSignature, GETDATE())";
 
-           //     using (SqlCommand command = new SqlCommand(query, connection))
-           //     {
-            //        command.Parameters.AddWithValue("@ClientID", clientId);
-            //        command.Parameters.AddWithValue("@CaregiverID", caregiverId);
-             //       command.Parameters.AddWithValue("@ShiftID", shiftId);
-             //       command.Parameters.AddWithValue("@ClientSignature", signatureData);
-             //       command.ExecuteNonQuery();
-             //   }
-           // }
-       // }
+        //     using (SqlCommand command = new SqlCommand(query, connection))
+        //     {
+        //        command.Parameters.AddWithValue("@ClientID", clientId);
+        //        command.Parameters.AddWithValue("@CaregiverID", caregiverId);
+        //       command.Parameters.AddWithValue("@ShiftID", shiftId);
+        //       command.Parameters.AddWithValue("@ClientSignature", signatureData);
+        //       command.ExecuteNonQuery();
+        //   }
+        // }
+        // }
 
 
 
         //private int GetOrCreateShiftId(string connectionString, int clientId, int caregiverId)
         //{
-          //  using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-              //  conn.Open();
+        //  using (SqlConnection conn = new SqlConnection(connectionString))
+        //{
+        //  conn.Open();
 
-                //string checkQuery = "SELECT ShiftID FROM Shifts_Assignment WHERE ClientID = @ClientID AND CaregiverID = @CaregiverID";
-                //using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
-                //{
-                  //  checkCmd.Parameters.AddWithValue("@ClientID", clientId);
-                    //checkCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+        //string checkQuery = "SELECT ShiftID FROM Shifts_Assignment WHERE ClientID = @ClientID AND CaregiverID = @CaregiverID";
+        //using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+        //{
+        //  checkCmd.Parameters.AddWithValue("@ClientID", clientId);
+        //checkCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
 
-                    //object result = checkCmd.ExecuteScalar();
-                    //if (result != null && int.TryParse(result.ToString(), out int existingShiftId))
-                    //{
-                      //  return existingShiftId;
-                    //}
-                //}
+        //object result = checkCmd.ExecuteScalar();
+        //if (result != null && int.TryParse(result.ToString(), out int existingShiftId))
+        //{
+        //  return existingShiftId;
+        //}
+        //}
 
-                //string insertQuery = "INSERT INTO Shifts_Assignment (ClientID, CaregiverID, shift_date, status) " +
-                  //                   "OUTPUT INSERTED.ShiftID VALUES (@ClientID, @CaregiverID, @Date, @Status)";
+        //string insertQuery = "INSERT INTO Shifts_Assignment (ClientID, CaregiverID, shift_date, status) " +
+        //                   "OUTPUT INSERTED.ShiftID VALUES (@ClientID, @CaregiverID, @Date, @Status)";
 
-                //using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
-                //{
-                  //  insertCmd.Parameters.AddWithValue("@ClientID", clientId);
-                    //insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
-                    //insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
-                    //insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
+        //using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+        //{
+        //  insertCmd.Parameters.AddWithValue("@ClientID", clientId);
+        //insertCmd.Parameters.AddWithValue("@CaregiverID", caregiverId);
+        //insertCmd.Parameters.AddWithValue("@Date", DateTime.Today);
+        //insertCmd.Parameters.AddWithValue("@Status", "Scheduled");
 
-                    //return (int)insertCmd.ExecuteScalar();
-                //}
-            //}
-       // }
+        //return (int)insertCmd.ExecuteScalar();
+        //}
+        //}
+        // }
     }
 }

@@ -22,7 +22,7 @@ namespace CareTrack
         public HomePage(string username, int id)
         {
             InitializeComponent();
-            
+
             //initializing components for username and id
             currentUser = username;
             caregiverId = id;
@@ -61,11 +61,13 @@ namespace CareTrack
         private void CollapseMenu()
         {
             btnHome.Visible = false;
-            btnTasks.Visible = false;
             btnTimeKeeping.Visible = false;
+            btnSchedule.Visible = false;
+            btnTasks.Visible = false;
             btnNotes.Visible = false;
+            btnHelp.Visible = false;
             btnLogOut.Visible = false;
-
+           
             panelMenu.Height = btnDropDownMenu.Height;
 
             isMenuExpanded = false;
@@ -77,9 +79,11 @@ namespace CareTrack
         private void ExpandMenu()
         {
             btnHome.Visible = true;
-            btnTasks.Visible = true;
             btnTimeKeeping.Visible = true;
+            btnSchedule.Visible = true;
+            btnTasks.Visible = true;
             btnNotes.Visible = true;
+            btnHelp.Visible = true;
             btnLogOut.Visible = true;
 
 
@@ -89,7 +93,7 @@ namespace CareTrack
 
         //button drop down menu
         private void btnDropDownMenu_Click(object sender, EventArgs e)
-        { 
+        {
             if (isMenuExpanded)
             {
                 CollapseMenu();
@@ -125,7 +129,7 @@ namespace CareTrack
 
         private void btnNotes_Click(object sender, EventArgs e)
         {
-            if(!AppState.TasksCompleted)
+            if (!AppState.TasksCompleted)
             {
                 PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
                 errorPopup.ShowDialog();
@@ -158,6 +162,11 @@ namespace CareTrack
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void HomePage_Load(object sender, EventArgs e)
         {
 
         }

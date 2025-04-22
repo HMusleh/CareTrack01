@@ -35,6 +35,7 @@ namespace CareTrack
             button1 = new Button();
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
+            button2 = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -99,6 +100,17 @@ namespace CareTrack
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Forgot password?";
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(128, 255, 255);
+            button2.Font = new Font("Century Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Location = new Point(12, 667);
+            button2.Name = "button2";
+            button2.Size = new Size(178, 58);
+            button2.TabIndex = 8;
+            button2.Text = "Help";
+            button2.UseVisualStyleBackColor = false;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -107,6 +119,7 @@ namespace CareTrack
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1505, 737);
+            Controls.Add(button2);
             Controls.Add(linkLabel2);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
@@ -114,9 +127,12 @@ namespace CareTrack
             Controls.Add(textBox1);
             DoubleBuffered = true;
             Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            MaximumSize = new Size(1521, 776);
+            MinimumSize = new Size(1521, 776);
             Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Caregiver Track";
-            Load += this.Form1_Load;
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -134,5 +150,6 @@ namespace CareTrack
         private Button button1;
         private LinkLabel linkLabel1;
         private LinkLabel linkLabel2;
+        private Button button2;
     }
 }

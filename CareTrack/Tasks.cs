@@ -19,7 +19,7 @@ namespace CareTrack
         private int careplanId;
         private DatabaseHelper db = new DatabaseHelper();
         private List<CheckBox> tasksCheckBoxes = new List<CheckBox>();
-        
+
 
         private bool isMenuExpanded = false;
 
@@ -54,9 +54,11 @@ namespace CareTrack
         private void CollapseMenu()
         {
             btnHome.Visible = false;
-            btnTasks.Visible = false;
             btnTimeKeeping.Visible = false;
+            btnSchedule.Visible = false;
+            btnTasks.Visible = false;
             btnNotes.Visible = false;
+            btnHelp.Visible = false;
             btnLogOut.Visible = false;
 
             panelMenu.Height = btnDropDownMenu.Height;
@@ -70,9 +72,11 @@ namespace CareTrack
         private void ExpandMenu()
         {
             btnHome.Visible = true;
-            btnTasks.Visible = true;
             btnTimeKeeping.Visible = true;
+            btnSchedule.Visible = true;
+            btnTasks.Visible = true;
             btnNotes.Visible = true;
+            btnHelp.Visible = true;
             btnLogOut.Visible = true;
 
 
@@ -177,9 +181,9 @@ namespace CareTrack
 
         //method for LoadTasks
         private void LoadTasks(int planId)
-   
+
         {
-            
+
             //local list
             List<(int TaskID, string Description)> taskList = new List<(int TaskID, string Description)>();
 
@@ -199,7 +203,7 @@ namespace CareTrack
 
                 using (var reader = cmd.ExecuteReader())
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         completedTaskId.Add(Convert.ToInt32(reader["TaskID"]));
                     }
@@ -207,7 +211,7 @@ namespace CareTrack
             }
 
             //load all tasks query
-                string taskQuery = @"SELECT t.TaskID, t.description FROM Care_Plan_Tasks cpt INNER JOIN Tasks t
+            string taskQuery = @"SELECT t.TaskID, t.description FROM Care_Plan_Tasks cpt INNER JOIN Tasks t
                             ON cpt.TaskID = t.TaskID WHERE cpt.CareplanID = @careplanId";
 
             using (var conn = db.OpenConnection())
@@ -226,7 +230,7 @@ namespace CareTrack
                             taskList.Add((taskId, description));
 
 
-                           
+
                         }
                     }
                 }
@@ -257,7 +261,7 @@ namespace CareTrack
                     TableTasks.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                     TableTasks.Controls.Add(cb, 0, rowIndex++);
                     tasksCheckBoxes.Add(cb);
-                   
+
                 }
 
             }
@@ -278,7 +282,7 @@ namespace CareTrack
 
                 if (isChecked)
                 {
-                   completedTaskIds.Add(taskId);
+                    completedTaskIds.Add(taskId);
                     completedDescriptions.Add(cb.Text);
                 }
                 //query to make it work
@@ -310,7 +314,7 @@ namespace CareTrack
             else
             {
                 PopWarning warningPopup = new PopWarning("Progress has been saved. Must complete all tasks to continue to notes and signature page.");
-                warningPopup.ShowDialog();            
+                warningPopup.ShowDialog();
             }
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -319,6 +323,11 @@ namespace CareTrack
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tasks_Load(object sender, EventArgs e)
         {
 
         }

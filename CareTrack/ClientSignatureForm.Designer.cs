@@ -73,7 +73,7 @@
             // btnClear
             // 
             btnClear.BackColor = Color.FromArgb(255, 128, 128);
-            btnClear.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClear.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnClear.Location = new Point(378, 299);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(135, 30);
@@ -145,6 +145,7 @@
             MaximumSize = new Size(657, 391);
             MinimumSize = new Size(657, 391);
             Name = "ClientsSignatureForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ClientsSignature";
             ResumeLayout(false);
             PerformLayout();

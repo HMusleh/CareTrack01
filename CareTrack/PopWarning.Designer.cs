@@ -56,7 +56,8 @@
             PopWarningTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PopWarningTextBox.Location = new Point(181, 119);
             PopWarningTextBox.Name = "PopWarningTextBox";
-            PopWarningTextBox.Size = new Size(254, 96);
+            PopWarningTextBox.ReadOnly = true;
+            PopWarningTextBox.Size = new Size(423, 96);
             PopWarningTextBox.TabIndex = 4;
             PopWarningTextBox.Text = "";
             // 

@@ -39,9 +39,10 @@
             // 
             PopErrorTextBox.BorderStyle = BorderStyle.None;
             PopErrorTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PopErrorTextBox.Location = new Point(181, 119);
+            PopErrorTextBox.Location = new Point(181, 160);
             PopErrorTextBox.Name = "PopErrorTextBox";
-            PopErrorTextBox.Size = new Size(254, 100);
+            PopErrorTextBox.ReadOnly = true;
+            PopErrorTextBox.Size = new Size(423, 100);
             PopErrorTextBox.TabIndex = 8;
             PopErrorTextBox.Text = "";
             // 

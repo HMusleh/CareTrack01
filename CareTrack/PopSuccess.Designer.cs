@@ -49,9 +49,10 @@
             // 
             PopSuccessTextBox.BorderStyle = BorderStyle.None;
             PopSuccessTextBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PopSuccessTextBox.Location = new Point(181, 119);
+            PopSuccessTextBox.Location = new Point(181, 165);
             PopSuccessTextBox.Name = "PopSuccessTextBox";
-            PopSuccessTextBox.Size = new Size(254, 96);
+            PopSuccessTextBox.ReadOnly = true;
+            PopSuccessTextBox.Size = new Size(423, 96);
             PopSuccessTextBox.TabIndex = 1;
             PopSuccessTextBox.Text = "";
             PopSuccessTextBox.TextChanged += richTextBox1_TextChanged;

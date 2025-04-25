@@ -17,7 +17,7 @@ namespace CareTrack
 
         private bool isMenuExpanded = false;
 
-        private string? currentUser;
+        private string currentUser;
         private int caregiverId;
         private int careplanId;
         private List<int>? taskIds;
@@ -36,7 +36,7 @@ namespace CareTrack
         public Signatures(int caregiverId, int careplanId, List<int> taskIds, List<string> taskDescriptions)
         {
             InitializeComponent();
-            this.currentUser = Username;
+           
             this.caregiverId = caregiverId;
             this.careplanId = careplanId;
             this.taskIds = taskIds;
@@ -200,7 +200,7 @@ namespace CareTrack
         }
 
         //submit button
-        private void BtnSubmit_Click(object sender, EventArgs e)
+        private void BtnSubmit_Click(object? sender, EventArgs e)
         {
             if (clientSignatureData == null)
             {
@@ -219,7 +219,12 @@ namespace CareTrack
             if (AppState.clientId <= 0)
             {
                 PopErrorForm errorPopup = new("Client ID is missing or invalid. Please ensure a valid shift exists.");
-                errorPopup.ShowDialog();
+                if (errorPopup.ShowDialog() == DialogResult.OK)
+                {
+                    Timekeeping clockOut = new(Username, caregiverId);
+                    clockOut.Show();
+                    this.Close();
+                }
                 return;
             }
 
@@ -229,14 +234,31 @@ namespace CareTrack
 
             if (shiftId <= 0)
             {
-                PopErrorForm errorPopup = new("Unable to determine shift. Please check client and caregiver assignment.");
-                errorPopup.ShowDialog();
+                using (PopErrorForm errorPopup = new("Unable to determine shift. Please check client and caregiver assignment."))
+                {
+                    if (errorPopup.ShowDialog() == DialogResult.OK)
+                    {
+                        // After user clicks OK, move to Clock Out
+                        Timekeeping clockOut = new(Username, caregiverId);
+                        clockOut.Show();
+                        this.Close();
+                    }
+                }
                 return;
             }
 
+
             SaveToDatabase();
-            PopSuccessForm successPopup = new("Service log has been submitted!");
-            successPopup.ShowDialog();
+            using (PopSuccessForm successPopup = new("Service log has been submitted!"))
+            {
+                if (successPopup.ShowDialog() == DialogResult.OK)
+                {
+                    Timekeeping clockOut = new(Username, caregiverId);
+                    clockOut.Show();
+                    this.Close();
+                }
+            }
+
         }
 
         //method for GetOrCreateShiftId
@@ -311,8 +333,7 @@ namespace CareTrack
             try
             {
                 cmd.ExecuteNonQuery();
-                PopSuccessForm successPopup = new("Insert successful");
-                successPopup.ShowDialog();
+                
             }
             catch (Exception ex)
             {

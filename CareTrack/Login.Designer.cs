@@ -133,7 +133,7 @@ namespace CareTrack
             MinimumSize = new Size(1521, 776);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Caregiver Track";
+            Text = "LogIn Page";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

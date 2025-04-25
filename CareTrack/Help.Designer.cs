@@ -310,7 +310,7 @@
             MinimumSize = new Size(1521, 776);
             Name = "Help";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Help";
+            Text = "Help Page";
             PanelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

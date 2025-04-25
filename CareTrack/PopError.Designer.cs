@@ -57,9 +57,10 @@
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
-            // btnOK
+            // BtnOK
             // 
             BtnOK.BackColor = Color.LightCoral;
+            BtnOK.DialogResult = DialogResult.OK;
             BtnOK.FlatAppearance.BorderSize = 0;
             BtnOK.FlatStyle = FlatStyle.Flat;
             BtnOK.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -70,8 +71,6 @@
             BtnOK.Text = "OK";
             BtnOK.UseVisualStyleBackColor = false;
             BtnOK.Click += BtnOK_Click;
-            
-
             // 
             // PopErrorForm
             // 

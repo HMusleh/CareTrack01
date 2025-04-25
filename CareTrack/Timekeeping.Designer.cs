@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timekeeping));
             label1 = new Label();
             label2 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            BtnClockIn = new Button();
+            BtnClockOut = new Button();
             panelMenu = new FlowLayoutPanel();
             btnDropDownMenu = new Button();
             btnHome = new Button();
@@ -70,29 +70,29 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.FromArgb(255, 128, 128);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(552, 222);
-            button1.Name = "button1";
-            button1.Size = new Size(561, 94);
-            button1.TabIndex = 2;
-            button1.Text = "Clock In";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += Button1_Click;
+            BtnClockIn.BackColor = Color.FromArgb(255, 128, 128);
+            BtnClockIn.FlatStyle = FlatStyle.Flat;
+            BtnClockIn.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnClockIn.Location = new Point(552, 222);
+            BtnClockIn.Name = "BtnClockIn";
+            BtnClockIn.Size = new Size(561, 94);
+            BtnClockIn.TabIndex = 2;
+            BtnClockIn.Text = "Clock In";
+            BtnClockIn.UseVisualStyleBackColor = false;
+            BtnClockIn.Click += BtnClockIn_Click;
             // 
             // button2
             // 
-            button2.BackColor = Color.FromArgb(255, 128, 128);
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(552, 439);
-            button2.Name = "button2";
-            button2.Size = new Size(561, 94);
-            button2.TabIndex = 7;
-            button2.Text = "Clock Out";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += Button2_Click;
+            BtnClockOut.BackColor = Color.FromArgb(255, 128, 128);
+            BtnClockOut.FlatStyle = FlatStyle.Flat;
+            BtnClockOut.Font = new Font("Century Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnClockOut.Location = new Point(552, 439);
+            BtnClockOut.Name = "BtnClockOut";
+            BtnClockOut.Size = new Size(561, 94);
+            BtnClockOut.TabIndex = 7;
+            BtnClockOut.Text = "Clock Out";
+            BtnClockOut.UseVisualStyleBackColor = false;
+            BtnClockOut.Click += BtnClockOut_Click;
             // 
             // panelMenu
             // 
@@ -295,15 +295,15 @@
             Controls.Add(lblShiftEndTime);
             Controls.Add(button3);
             Controls.Add(panelMenu);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(BtnClockOut);
+            Controls.Add(BtnClockIn);
             Controls.Add(label2);
             Controls.Add(label1);
             MaximumSize = new Size(1521, 776);
             MinimumSize = new Size(1521, 776);
             Name = "Timekeeping";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CT - Time Punch";
+            Text = "TimePunch Page";
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -313,8 +313,8 @@
 
         private Label label1;
         private Label label2;
-        private Button button1;
-        private Button button2;
+        private Button BtnClockIn;
+        private Button BtnClockOut;
         private FlowLayoutPanel panelMenu;
         private Button btnDropDownMenu;
         private Button btnHome;

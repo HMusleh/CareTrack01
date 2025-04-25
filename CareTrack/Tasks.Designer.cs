@@ -283,7 +283,7 @@
             MinimumSize = new Size(1521, 776);
             Name = "Tasks";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Tasks Page";
             panelMenu.ResumeLayout(false);
             paneltasks.ResumeLayout(false);
             paneltasks.PerformLayout();

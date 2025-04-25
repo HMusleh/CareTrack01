@@ -94,7 +94,7 @@
             MinimumSize = new Size(632, 378);
             Name = "ReasonPopup";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Provide Reason";
+            Text = "Reason";
             groupBoxReasons.ResumeLayout(false);
             groupBoxReasons.PerformLayout();
             ResumeLayout(false);

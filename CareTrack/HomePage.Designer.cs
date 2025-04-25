@@ -269,7 +269,7 @@ namespace CareTrack
             Name = "HomePage";
             RightToLeft = RightToLeft.No;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CT - Home";
+            Text = "Home Page";
             
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);

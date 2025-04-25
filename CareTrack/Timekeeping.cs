@@ -32,6 +32,8 @@ namespace CareTrack
 
         }
 
+        
+
         //Methods for the drop down menu
         //method for collapseing the menu
         private void CollapseMenu()
@@ -137,7 +139,7 @@ namespace CareTrack
             this.Close();
         }
         //clock in button
-        private async void Button1_Click(object sender, EventArgs e)
+        private async void BtnClockIn_Click(object sender, EventArgs e)
         {
             //realtime and date
             DateTime now = DateTime.Now;
@@ -191,7 +193,7 @@ namespace CareTrack
         }
 
         //clock out button
-        private void Button2_Click(object sender, EventArgs e)
+        private void BtnClockOut_Click(object sender, EventArgs e)
         {
 
             //realtime date

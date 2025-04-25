@@ -56,11 +56,11 @@
             PopSuccessTextBox.Size = new Size(423, 96);
             PopSuccessTextBox.TabIndex = 1;
             PopSuccessTextBox.Text = "";
-            
             // 
-            // btnContinue
+            // BtnContinue
             // 
             BtnContinue.BackColor = Color.LightCoral;
+            BtnContinue.DialogResult = DialogResult.OK;
             BtnContinue.FlatAppearance.BorderSize = 0;
             BtnContinue.FlatStyle = FlatStyle.Flat;
             BtnContinue.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);

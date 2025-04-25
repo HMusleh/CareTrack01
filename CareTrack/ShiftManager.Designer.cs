@@ -403,7 +403,7 @@
             MinimumSize = new Size(1521, 776);
             Name = "ShiftManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Schedule Page";
             
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);

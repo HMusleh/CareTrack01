@@ -7,30 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Azure.Identity;
 using Microsoft.Data.SqlClient;
 
 namespace CareTrack
 {
     public partial class Tasks : Form
     {
-        private string currentUser;
+        private  string? currentUser;
         private int caregiverId;
-        private int caregiverplanId;
+      
         private int careplanId;
-        private DatabaseHelper db = new DatabaseHelper();
-        private List<CheckBox> tasksCheckBoxes = new List<CheckBox>();
+        private DatabaseHelper db = new();
+        private List<CheckBox> tasksCheckBoxes = [];
 
 
         private bool isMenuExpanded = false;
 
+        public string Username { get; private set; }
 
         public Tasks(int caregiverId)
         {
             InitializeComponent();
             btnTasks.Enabled = false;
+
             //dropdown 
             CollapseMenu();
-
+            this.currentUser = Username;
             this.caregiverId = caregiverId;
 
 
@@ -41,11 +44,11 @@ namespace CareTrack
             }
             else
             {
-                PopWarning warningPopup = new PopWarning("No care plan for today.");
+                PopWarning warningPopup = new("No care plan for today.");
                 warningPopup.ShowDialog();
                 button1.Enabled = false;
             }
-            button1.Click += button1_Click;
+            
         }
 
 
@@ -101,39 +104,87 @@ namespace CareTrack
         //homepage button on dropdown menu
         private void btnHome_Click(object sender, EventArgs e)
         {
-            HomePage home = new HomePage(currentUser, caregiverId);
+            HomePage home = new(Username, caregiverId);
             home.Show();
             this.Hide();
         }
         //tasks button on dropdown menu
         private void btnTasks_Click(object sender, EventArgs e)
         {
-            Tasks task = new Tasks(caregiverId);
+            Tasks task = new(caregiverId);
             task.Show();
             this.Hide();
         }
+        private void btnSchedule_Click(object sender, EventArgs e)
+        {
+            ShiftManagerForm scheduleForm = new(Username, caregiverId);
+            scheduleForm.Show();
+            this.Hide();
+        }
+
 
         private void btnTimeKeeping_Click(object sender, EventArgs e)
         {
-            Timekeeping timekeeping = new Timekeeping(currentUser, caregiverId);
+            Timekeeping timekeeping = new(Username, caregiverId);
             timekeeping.Show();
             this.Hide();
         }
 
-        private void btnNotes_Click(object sender, EventArgs e)
+        
+            private void BtnNotes_Click(object sender, EventArgs e)
         {
-            if (!AppState.TasksCompleted)
+            List<int> completedTaskIds = [];
+            List<string> completedDescriptions = [];
+
+            bool allCompleted = tasksCheckBoxes.All(cb => cb.Checked);
+
+            foreach (CheckBox cb in tasksCheckBoxes)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
-                errorPopup.ShowDialog();
-                return;
+                int taskId = (int)cb.Tag;
+                bool isChecked = cb.Checked;
+
+                if (isChecked)
+                {
+                    completedTaskIds.Add(taskId);
+                    completedDescriptions.Add(cb.Text);
+                }
             }
-            Signatures s = new Signatures
-                (AppState.caregiverId,
-                AppState.careplanId,
-                AppState.completedTaskId,
-                AppState.completedDescriptions);
+
+            if (allCompleted )
+            {
+                AppState.TasksCompleted = true;
+                AppState.completedTaskId = completedTaskIds;
+                AppState.completedDescriptions = completedDescriptions;
+
+                Signatures s = new(caregiverId, careplanId, completedTaskIds, completedDescriptions);
+                s.Show();
+                this.Hide();
+            }
+            else
+            {
+                ReasonPopup reasonPopup = new();
+                DialogResult result = reasonPopup.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    AppState.TasksCompleted = true;
+                    AppState.completedTaskId = completedTaskIds;
+                    AppState.completedDescriptions = completedDescriptions;
+
+                    Signatures s = new(caregiverId, careplanId, completedTaskIds, completedDescriptions);
+                    s.Show();
+                    this.Hide();
+                }
+            }
         }
+
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            Help helpForm = new(Username, caregiverId);
+            helpForm.ShowDialog();
+        }
+
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -145,7 +196,7 @@ namespace CareTrack
             AppState.completedDescriptions?.Clear();
 
             //back to login page
-            Login login = new Login();
+            Login login = new();
             login.Show();
 
             //close
@@ -163,18 +214,14 @@ namespace CareTrack
             string query = @"SELECT cp.PlanID, cp.ClientID FROM Shifts_Assignment sa INNER JOIN CarePlans cp ON
                             sa.ClientID = cp.ClientID WHERE sa.CaregiverID = @cid AND sa.shift_date = CAST(GETDATE() AS DATE)";
 
-            using (var conn = db.OpenConnection())
-            using (var cmd = new SqlCommand(query, conn))
+            using var conn = db.OpenConnection();
+            using var cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@cid", caregiverId);
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
             {
-                cmd.Parameters.AddWithValue("@cid", caregiverId);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        AppState.clientId = Convert.ToInt32(reader["ClientID"]);
-                        return Convert.ToInt32(reader["PlanID"]);
-                    }
-                }
+                AppState.clientId = Convert.ToInt32(reader["ClientID"]);
+                return Convert.ToInt32(reader["PlanID"]);
             }
             return -1;
         }
@@ -185,10 +232,10 @@ namespace CareTrack
         {
 
             //local list
-            List<(int TaskID, string Description)> taskList = new List<(int TaskID, string Description)>();
+            List<(int TaskID, string Description)> taskList = [];
 
             //aquire completed tasks first
-            HashSet<int> completedTaskId = new HashSet<int>();
+            HashSet<int> completedTaskId = [];
 
 
             //the query that tells the app to pull the completed tasks from previous sessions
@@ -201,12 +248,10 @@ namespace CareTrack
                 cmd.Parameters.AddWithValue("@cid", caregiverId);
                 cmd.Parameters.AddWithValue("@pid", planId);
 
-                using (var reader = cmd.ExecuteReader())
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        completedTaskId.Add(Convert.ToInt32(reader["TaskID"]));
-                    }
+                    completedTaskId.Add(Convert.ToInt32(reader["TaskID"]));
                 }
             }
 
@@ -227,7 +272,9 @@ namespace CareTrack
                             int taskId = Convert.ToInt32(planIdreader["TaskID"]);
 
                             string description = planIdreader["description"].ToString();
+#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
                             taskList.Add((taskId, description));
+#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
 
 
 
@@ -248,15 +295,17 @@ namespace CareTrack
                 //checkbox time
 
                 int rowIndex = 0;
-                foreach (var task in taskList)
+                foreach (var (TaskID, Description) in taskList)
                 {
-                    CheckBox cb = new CheckBox();
-                    cb.Text = task.Description;
-                    cb.Tag = task.TaskID;
-                    cb.Checked = completedTaskId.Contains(task.TaskID);
-                    cb.Font = new Font("Century Gothic", 14);
-                    cb.AutoSize = true;
-                    cb.Margin = new Padding(10, 5, 10, 5);
+                    CheckBox cb = new()
+                    {
+                        Text = Description,
+                        Tag = TaskID,
+                        Checked = completedTaskId.Contains(TaskID),
+                        Font = new Font("Century Gothic", 14),
+                        AutoSize = true,
+                        Margin = new Padding(10, 5, 10, 5)
+                    };
 
                     TableTasks.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                     TableTasks.Controls.Add(cb, 0, rowIndex++);
@@ -268,8 +317,8 @@ namespace CareTrack
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            List<int> completedTaskIds = new List<int>();
-            List<string> completedDescriptions = new List<string>();
+            List<int> completedTaskIds = [];
+            List<string> completedDescriptions = [];
 
 
             //to make sure that all check boxes are clicked
@@ -295,41 +344,53 @@ namespace CareTrack
                                     INSERT (CaregiverID, PlanID, TaskID, Completed, CompletionTime)
                                     VALUES (@cid, @pid, @tid, @completed, GETDATE());";
 
-                using (SqlCommand cmd = new SqlCommand(query, db.OpenConnection()))
-                {
-                    cmd.Parameters.AddWithValue("@cid", caregiverId);
-                    cmd.Parameters.AddWithValue("@pid", careplanId);
-                    cmd.Parameters.AddWithValue("@tid", taskId);
-                    cmd.Parameters.AddWithValue("@completed", isChecked);
-                    cmd.ExecuteNonQuery();
-                }
+                using SqlCommand cmd = new(query, db.OpenConnection());
+                cmd.Parameters.AddWithValue("@cid", caregiverId);
+                cmd.Parameters.AddWithValue("@pid", careplanId);
+                cmd.Parameters.AddWithValue("@tid", taskId);
+                cmd.Parameters.AddWithValue("@completed", isChecked);
+                cmd.ExecuteNonQuery();
             }
 
             if (allCompleted)
             {
-                Signatures signature = new Signatures(caregiverId, careplanId, completedTaskIds, completedDescriptions);
+                AppState.TasksCompleted = true;
+                AppState.completedTaskId = completedTaskIds;
+                AppState.completedDescriptions = completedDescriptions;
+
+                Signatures signature = new(caregiverId, careplanId, completedTaskIds, completedDescriptions);
                 signature.Show();
                 this.Hide();
             }
             else
             {
-                PopWarning warningPopup = new PopWarning("Progress has been saved. Must complete all tasks to continue to notes and signature page.");
-                warningPopup.ShowDialog();
+                ReasonPopup reasonPopup = new();
+                DialogResult result = reasonPopup.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    string reason = reasonPopup.SelectedReason;
+
+                    // Optional: Log the reason or show it if needed
+                    Console.WriteLine("Reason selected: " + reason);
+
+                    AppState.TasksCompleted = true;
+                    AppState.completedTaskId = completedTaskIds;
+                    AppState.completedDescriptions = completedDescriptions;
+
+                    Signatures signature = new(caregiverId, careplanId, completedTaskIds, completedDescriptions);
+                    signature.Show();
+                    this.Hide();
+                }
             }
+
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
         {
-
+            Help helpForm = new();
+            helpForm.ShowDialog();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Tasks_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopSuccessForm));
             pictureBox1 = new PictureBox();
             PopSuccessTextBox = new RichTextBox();
-            btnContinue = new Button();
+            BtnContinue = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -56,21 +56,21 @@
             PopSuccessTextBox.Size = new Size(423, 96);
             PopSuccessTextBox.TabIndex = 1;
             PopSuccessTextBox.Text = "";
-            PopSuccessTextBox.TextChanged += richTextBox1_TextChanged;
+            
             // 
             // btnContinue
             // 
-            btnContinue.BackColor = Color.LightCoral;
-            btnContinue.FlatAppearance.BorderSize = 0;
-            btnContinue.FlatStyle = FlatStyle.Flat;
-            btnContinue.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinue.Location = new Point(181, 267);
-            btnContinue.Name = "btnContinue";
-            btnContinue.Size = new Size(254, 35);
-            btnContinue.TabIndex = 2;
-            btnContinue.Text = "Continue";
-            btnContinue.UseVisualStyleBackColor = false;
-            btnContinue.Click += btnContinue_Click;
+            BtnContinue.BackColor = Color.LightCoral;
+            BtnContinue.FlatAppearance.BorderSize = 0;
+            BtnContinue.FlatStyle = FlatStyle.Flat;
+            BtnContinue.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnContinue.Location = new Point(181, 267);
+            BtnContinue.Name = "BtnContinue";
+            BtnContinue.Size = new Size(254, 35);
+            BtnContinue.TabIndex = 2;
+            BtnContinue.Text = "Continue";
+            BtnContinue.UseVisualStyleBackColor = false;
+            BtnContinue.Click += BtnContinue_Click;
             // 
             // PopSuccessForm
             // 
@@ -78,7 +78,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(616, 339);
-            Controls.Add(btnContinue);
+            Controls.Add(BtnContinue);
             Controls.Add(PopSuccessTextBox);
             Controls.Add(pictureBox1);
             MaximumSize = new Size(632, 378);
@@ -95,6 +95,6 @@
 
         private PictureBox pictureBox1;
         private RichTextBox PopSuccessTextBox;
-        private Button btnContinue;
+        private Button BtnContinue;
     }
 }

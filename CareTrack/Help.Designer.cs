@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Help));
-            panelMenu = new FlowLayoutPanel();
-            btnDropDownMenu = new Button();
-            btnHome = new Button();
-            btnTimeKeeping = new Button();
-            btnSchedule = new Button();
-            btnTasks = new Button();
-            btnNotes = new Button();
-            btnHelp = new Button();
-            btnLogOut = new Button();
+            PanelMenu = new FlowLayoutPanel();
+            BtnDropDownMenu = new Button();
+            BtnHome = new Button();
+            BtnTimeKeeping = new Button();
+            BtnSchedule = new Button();
+            BtnTasks = new Button();
+            BtnNotes = new Button();
+            BtnHelp = new Button();
+            BtnLogOut = new Button();
             TutorialLabel = new Label();
             LoginTut = new LinkLabel();
             HomeTut = new LinkLabel();
@@ -45,153 +45,161 @@
             ScheduleTut = new LinkLabel();
             TasksTut = new LinkLabel();
             SignatureTut = new LinkLabel();
-            panelMenu.SuspendLayout();
+            PanelMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
-            panelMenu.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panelMenu.BackColor = Color.LightCoral;
-            panelMenu.Controls.Add(btnDropDownMenu);
-            panelMenu.Controls.Add(btnHome);
-            panelMenu.Controls.Add(btnTimeKeeping);
-            panelMenu.Controls.Add(btnSchedule);
-            panelMenu.Controls.Add(btnTasks);
-            panelMenu.Controls.Add(btnNotes);
-            panelMenu.Controls.Add(btnHelp);
-            panelMenu.Controls.Add(btnLogOut);
-            panelMenu.FlowDirection = FlowDirection.TopDown;
-            panelMenu.Location = new Point(1236, 1);
-            panelMenu.Margin = new Padding(3, 2, 3, 2);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(268, 94);
-            panelMenu.TabIndex = 7;
-            panelMenu.WrapContents = false;
+            PanelMenu.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PanelMenu.BackColor = Color.LightCoral;
+            PanelMenu.Controls.Add(BtnDropDownMenu);
+            PanelMenu.Controls.Add(BtnHome);
+            PanelMenu.Controls.Add(BtnTimeKeeping);
+            PanelMenu.Controls.Add(BtnSchedule);
+            PanelMenu.Controls.Add(BtnTasks);
+            PanelMenu.Controls.Add(BtnNotes);
+            PanelMenu.Controls.Add(BtnHelp);
+            PanelMenu.Controls.Add(BtnLogOut);
+            PanelMenu.FlowDirection = FlowDirection.TopDown;
+            PanelMenu.Location = new Point(1236, 1);
+            PanelMenu.Margin = new Padding(3, 2, 3, 2);
+            PanelMenu.Name = "panelMenu";
+            PanelMenu.Size = new Size(268, 94);
+            PanelMenu.TabIndex = 7;
+            PanelMenu.WrapContents = false;
             // 
             // btnDropDownMenu
             // 
-            btnDropDownMenu.FlatAppearance.BorderSize = 0;
-            btnDropDownMenu.FlatStyle = FlatStyle.Flat;
-            btnDropDownMenu.Image = (Image)resources.GetObject("btnDropDownMenu.Image");
-            btnDropDownMenu.Location = new Point(0, 0);
-            btnDropDownMenu.Margin = new Padding(0);
-            btnDropDownMenu.Name = "btnDropDownMenu";
-            btnDropDownMenu.Size = new Size(268, 94);
-            btnDropDownMenu.TabIndex = 0;
-            btnDropDownMenu.UseVisualStyleBackColor = true;
+            BtnDropDownMenu.FlatAppearance.BorderSize = 0;
+            BtnDropDownMenu.FlatStyle = FlatStyle.Flat;
+            BtnDropDownMenu.Image = (Image)resources.GetObject("btnDropDownMenu.Image");
+            BtnDropDownMenu.Location = new Point(0, 0);
+            BtnDropDownMenu.Margin = new Padding(0);
+            BtnDropDownMenu.Name = "BtnDropDownMenu";
+            BtnDropDownMenu.Size = new Size(268, 94);
+            BtnDropDownMenu.TabIndex = 0;
+            BtnDropDownMenu.UseVisualStyleBackColor = true;
+            BtnDropDownMenu.Click += BtnDropDownMenu_Click;
             // 
             // btnHome
             // 
-            btnHome.FlatAppearance.BorderSize = 0;
-            btnHome.FlatStyle = FlatStyle.Flat;
-            btnHome.Font = new Font("Century Gothic", 18F);
-            btnHome.ForeColor = SystemColors.ActiveCaptionText;
-            btnHome.Image = (Image)resources.GetObject("btnHome.Image");
-            btnHome.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHome.Location = new Point(3, 97);
-            btnHome.Name = "btnHome";
-            btnHome.Size = new Size(268, 81);
-            btnHome.TabIndex = 6;
-            btnHome.Tag = "Home";
-            btnHome.Text = "          Home";
-            btnHome.TextAlign = ContentAlignment.MiddleLeft;
-            btnHome.UseVisualStyleBackColor = true;
+            BtnHome.FlatAppearance.BorderSize = 0;
+            BtnHome.FlatStyle = FlatStyle.Flat;
+            BtnHome.Font = new Font("Century Gothic", 18F);
+            BtnHome.ForeColor = SystemColors.ActiveCaptionText;
+            BtnHome.Image = (Image)resources.GetObject("btnHome.Image");
+            BtnHome.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnHome.Location = new Point(3, 97);
+            BtnHome.Name = "BtnHome";
+            BtnHome.Size = new Size(268, 81);
+            BtnHome.TabIndex = 6;
+            BtnHome.Tag = "Home";
+            BtnHome.Text = "          Home";
+            BtnHome.TextAlign = ContentAlignment.MiddleLeft;
+            BtnHome.UseVisualStyleBackColor = true;
+            BtnHome.Click += BtnHome_Click;
             // 
             // btnTimeKeeping
             // 
-            btnTimeKeeping.FlatAppearance.BorderSize = 0;
-            btnTimeKeeping.FlatStyle = FlatStyle.Flat;
-            btnTimeKeeping.Font = new Font("Century Gothic", 18F);
-            btnTimeKeeping.Image = (Image)resources.GetObject("btnTimeKeeping.Image");
-            btnTimeKeeping.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTimeKeeping.Location = new Point(3, 184);
-            btnTimeKeeping.Name = "btnTimeKeeping";
-            btnTimeKeeping.Size = new Size(268, 81);
-            btnTimeKeeping.TabIndex = 8;
-            btnTimeKeeping.Tag = "Timekeeping";
-            btnTimeKeeping.Text = "          Timekeeping";
-            btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
-            btnTimeKeeping.UseVisualStyleBackColor = true;
+            BtnTimeKeeping.FlatAppearance.BorderSize = 0;
+            BtnTimeKeeping.FlatStyle = FlatStyle.Flat;
+            BtnTimeKeeping.Font = new Font("Century Gothic", 18F);
+            BtnTimeKeeping.Image = (Image)resources.GetObject("btnTimeKeeping.Image");
+            BtnTimeKeeping.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnTimeKeeping.Location = new Point(3, 184);
+            BtnTimeKeeping.Name = "BtnTimeKeeping";
+            BtnTimeKeeping.Size = new Size(268, 81);
+            BtnTimeKeeping.TabIndex = 8;
+            BtnTimeKeeping.Tag = "Timekeeping";
+            BtnTimeKeeping.Text = "          Timekeeping";
+            BtnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
+            BtnTimeKeeping.UseVisualStyleBackColor = true;
+            BtnTimeKeeping.Click += BtnTimeKeeping_Click;
             // 
             // btnSchedule
             // 
-            btnSchedule.FlatAppearance.BorderSize = 0;
-            btnSchedule.FlatStyle = FlatStyle.Flat;
-            btnSchedule.Font = new Font("Century Gothic", 18F);
-            btnSchedule.Image = (Image)resources.GetObject("btnSchedule.Image");
-            btnSchedule.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSchedule.Location = new Point(3, 271);
-            btnSchedule.Name = "btnSchedule";
-            btnSchedule.Size = new Size(268, 81);
-            btnSchedule.TabIndex = 12;
-            btnSchedule.Tag = "Notes";
-            btnSchedule.Text = "          Schedule";
-            btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
-            btnSchedule.UseVisualStyleBackColor = true;
+            BtnSchedule.FlatAppearance.BorderSize = 0;
+            BtnSchedule.FlatStyle = FlatStyle.Flat;
+            BtnSchedule.Font = new Font("Century Gothic", 18F);
+            BtnSchedule.Image = (Image)resources.GetObject("btnSchedule.Image");
+            BtnSchedule.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnSchedule.Location = new Point(3, 271);
+            BtnSchedule.Name = "BtnSchedule";
+            BtnSchedule.Size = new Size(268, 81);
+            BtnSchedule.TabIndex = 12;
+            BtnSchedule.Tag = "Notes";
+            BtnSchedule.Text = "          Schedule";
+            BtnSchedule.TextAlign = ContentAlignment.MiddleLeft;
+            BtnSchedule.UseVisualStyleBackColor = true;
+            BtnSchedule.Click += BtnSchedule_Click;
             // 
             // btnTasks
             // 
-            btnTasks.FlatAppearance.BorderSize = 0;
-            btnTasks.FlatStyle = FlatStyle.Flat;
-            btnTasks.Font = new Font("Century Gothic", 18F);
-            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
-            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTasks.Location = new Point(3, 358);
-            btnTasks.Name = "btnTasks";
-            btnTasks.Size = new Size(268, 81);
-            btnTasks.TabIndex = 7;
-            btnTasks.Tag = "Tasks";
-            btnTasks.Text = "          Tasks";
-            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
-            btnTasks.UseVisualStyleBackColor = true;
+            BtnTasks.FlatAppearance.BorderSize = 0;
+            BtnTasks.FlatStyle = FlatStyle.Flat;
+            BtnTasks.Font = new Font("Century Gothic", 18F);
+            BtnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
+            BtnTasks.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnTasks.Location = new Point(3, 358);
+            BtnTasks.Name = "BtnTasks";
+            BtnTasks.Size = new Size(268, 81);
+            BtnTasks.TabIndex = 7;
+            BtnTasks.Tag = "Tasks";
+            BtnTasks.Text = "          Tasks";
+            BtnTasks.TextAlign = ContentAlignment.MiddleLeft;
+            BtnTasks.UseVisualStyleBackColor = true;
+            BtnTasks.Click += BtnTasks_Click;
             // 
             // btnNotes
             // 
-            btnNotes.FlatAppearance.BorderSize = 0;
-            btnNotes.FlatStyle = FlatStyle.Flat;
-            btnNotes.Font = new Font("Century Gothic", 18F);
-            btnNotes.Image = (Image)resources.GetObject("btnNotes.Image");
-            btnNotes.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNotes.Location = new Point(3, 445);
-            btnNotes.Name = "btnNotes";
-            btnNotes.Size = new Size(268, 81);
-            btnNotes.TabIndex = 9;
-            btnNotes.Tag = "Notes";
-            btnNotes.Text = "          Notes";
-            btnNotes.TextAlign = ContentAlignment.MiddleLeft;
-            btnNotes.UseVisualStyleBackColor = true;
+            BtnNotes.FlatAppearance.BorderSize = 0;
+            BtnNotes.FlatStyle = FlatStyle.Flat;
+            BtnNotes.Font = new Font("Century Gothic", 18F);
+            BtnNotes.Image = (Image)resources.GetObject("btnNotes.Image");
+            BtnNotes.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnNotes.Location = new Point(3, 445);
+            BtnNotes.Name = "BtnNotes";
+            BtnNotes.Size = new Size(268, 81);
+            BtnNotes.TabIndex = 9;
+            BtnNotes.Tag = "Notes";
+            BtnNotes.Text = "          Notes";
+            BtnNotes.TextAlign = ContentAlignment.MiddleLeft;
+            BtnNotes.UseVisualStyleBackColor = true;   
+            BtnNotes.Click += BtnNotes_Click;
             // 
             // btnHelp
             // 
-            btnHelp.FlatAppearance.BorderSize = 0;
-            btnHelp.FlatStyle = FlatStyle.Flat;
-            btnHelp.Font = new Font("Century Gothic", 18F);
-            btnHelp.Image = (Image)resources.GetObject("btnHelp.Image");
-            btnHelp.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHelp.Location = new Point(3, 532);
-            btnHelp.Name = "btnHelp";
-            btnHelp.Size = new Size(268, 81);
-            btnHelp.TabIndex = 11;
-            btnHelp.Tag = "Notes";
-            btnHelp.Text = "          Help";
-            btnHelp.TextAlign = ContentAlignment.MiddleLeft;
-            btnHelp.UseVisualStyleBackColor = true;
+            BtnHelp.FlatAppearance.BorderSize = 0;
+            BtnHelp.FlatStyle = FlatStyle.Flat;
+            BtnHelp.Font = new Font("Century Gothic", 18F);
+            BtnHelp.Image = (Image)resources.GetObject("btnHelp.Image");
+            BtnHelp.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnHelp.Location = new Point(3, 532);
+            BtnHelp.Name = "BtnHelp";
+            BtnHelp.Size = new Size(268, 81);
+            BtnHelp.TabIndex = 11;
+            BtnHelp.Tag = "Notes";
+            BtnHelp.Text = "          Help";
+            BtnHelp.TextAlign = ContentAlignment.MiddleLeft;
+            BtnHelp.UseVisualStyleBackColor = true;
+
             // 
             // btnLogOut
             // 
-            btnLogOut.FlatAppearance.BorderSize = 0;
-            btnLogOut.FlatStyle = FlatStyle.Flat;
-            btnLogOut.Font = new Font("Century Gothic", 18F);
-            btnLogOut.Image = (Image)resources.GetObject("btnLogOut.Image");
-            btnLogOut.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLogOut.Location = new Point(3, 619);
-            btnLogOut.Name = "btnLogOut";
-            btnLogOut.Size = new Size(268, 81);
-            btnLogOut.TabIndex = 10;
-            btnLogOut.Tag = "Logout";
-            btnLogOut.Text = "          Logout";
-            btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
-            btnLogOut.UseVisualStyleBackColor = true;
+            BtnLogOut.FlatAppearance.BorderSize = 0;
+            BtnLogOut.FlatStyle = FlatStyle.Flat;
+            BtnLogOut.Font = new Font("Century Gothic", 18F);
+            BtnLogOut.Image = (Image)resources.GetObject("btnLogOut.Image");
+            BtnLogOut.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnLogOut.Location = new Point(3, 619);
+            BtnLogOut.Name = "BtnLogOut";
+            BtnLogOut.Size = new Size(268, 81);
+            BtnLogOut.TabIndex = 10;
+            BtnLogOut.Tag = "Logout";
+            BtnLogOut.Text = "          Logout";
+            BtnLogOut.TextAlign = ContentAlignment.MiddleLeft;
+            BtnLogOut.UseVisualStyleBackColor = true;
+            BtnLogOut.Click += BtnLogOut_Click;
             // 
             // TutorialLabel
             // 
@@ -215,6 +223,7 @@
             LoginTut.TabStop = true;
             LoginTut.Text = "How To: Login and Logout";
             LoginTut.LinkClicked += ClockInLink_LinkClicked;
+
             // 
             // HomeTut
             // 
@@ -227,6 +236,7 @@
             HomeTut.TabIndex = 10;
             HomeTut.TabStop = true;
             HomeTut.Text = "How To: Navigate the Home Screen";
+            HomeTut.LinkClicked += HomeTut_LinkClicked;
             // 
             // TimekeepingTut
             // 
@@ -239,6 +249,7 @@
             TimekeepingTut.TabIndex = 11;
             TimekeepingTut.TabStop = true;
             TimekeepingTut.Text = "How To: Clock In/Out for Shifts";
+            TimekeepingTut.LinkClicked += TimekeepingTut_LinkClicked;
             // 
             // ScheduleTut
             // 
@@ -251,6 +262,7 @@
             ScheduleTut.TabIndex = 12;
             ScheduleTut.TabStop = true;
             ScheduleTut.Text = "How To: View Your Schedule";
+            ScheduleTut.LinkClicked += ScheduleTut_LinkClicked;
             // 
             // TasksTut
             // 
@@ -263,6 +275,7 @@
             TasksTut.TabIndex = 13;
             TasksTut.TabStop = true;
             TasksTut.Text = "How To: View/Manage Tasks";
+            TasksTut.LinkClicked += TasksTut_LinkClicked;
             // 
             // SignatureTut
             // 
@@ -275,6 +288,7 @@
             SignatureTut.TabIndex = 14;
             SignatureTut.TabStop = true;
             SignatureTut.Text = "How To: Save Notes and Signatures";
+            SignatureTut.LinkClicked += SignatureTut_LinkClicked;
             // 
             // Help
             // 
@@ -291,28 +305,28 @@
             Controls.Add(HomeTut);
             Controls.Add(LoginTut);
             Controls.Add(TutorialLabel);
-            Controls.Add(panelMenu);
+            Controls.Add(PanelMenu);
             MaximumSize = new Size(1521, 776);
             MinimumSize = new Size(1521, 776);
             Name = "Help";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Help";
-            panelMenu.ResumeLayout(false);
+            PanelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private FlowLayoutPanel panelMenu;
-        private Button btnDropDownMenu;
-        private Button btnHome;
-        private Button btnTimeKeeping;
-        private Button btnSchedule;
-        private Button btnTasks;
-        private Button btnNotes;
-        private Button btnHelp;
-        private Button btnLogOut;
+        private FlowLayoutPanel PanelMenu;
+        private Button BtnDropDownMenu;
+        private Button BtnHome;
+        private Button BtnTimeKeeping;
+        private Button BtnSchedule;
+        private Button BtnTasks;
+        private Button BtnNotes;
+        private Button BtnHelp;
+        private Button BtnLogOut;
         private Label TutorialLabel;
         private LinkLabel LoginTut;
         private LinkLabel HomeTut;

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopWarning));
-            btnContinueWarning = new Button();
+            BtnContinueWarning = new Button();
             PopWarningTextBox = new RichTextBox();
             pictureBox1 = new PictureBox();
             btnCancelWarning = new Button();
@@ -38,17 +38,17 @@
             // 
             // btnContinueWarning
             // 
-            btnContinueWarning.BackColor = Color.LightCoral;
-            btnContinueWarning.FlatAppearance.BorderSize = 0;
-            btnContinueWarning.FlatStyle = FlatStyle.Flat;
-            btnContinueWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinueWarning.Location = new Point(30, 292);
-            btnContinueWarning.Name = "btnContinueWarning";
-            btnContinueWarning.Size = new Size(254, 35);
-            btnContinueWarning.TabIndex = 5;
-            btnContinueWarning.Text = "Continue";
-            btnContinueWarning.UseVisualStyleBackColor = false;
-            btnContinueWarning.Click += btnContinueWarning_Click;
+            BtnContinueWarning.BackColor = Color.LightCoral;
+            BtnContinueWarning.FlatAppearance.BorderSize = 0;
+            BtnContinueWarning.FlatStyle = FlatStyle.Flat;
+            BtnContinueWarning.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnContinueWarning.Location = new Point(30, 292);
+            BtnContinueWarning.Name = "btnContinueWarning";
+            BtnContinueWarning.Size = new Size(254, 35);
+            BtnContinueWarning.TabIndex = 5;
+            BtnContinueWarning.Text = "Continue";
+            BtnContinueWarning.UseVisualStyleBackColor = false;
+            BtnContinueWarning.Click += BtnContinueWarning_Click;
             // 
             // PopWarningTextBox
             // 
@@ -84,7 +84,7 @@
             btnCancelWarning.TabIndex = 6;
             btnCancelWarning.Text = "Cancel";
             btnCancelWarning.UseVisualStyleBackColor = false;
-            btnCancelWarning.Click += btnCancelWarning_Click;
+            btnCancelWarning.Click += BtnCancelWarning_Click;
             // 
             // PopWarning
             // 
@@ -93,7 +93,7 @@
             BackColor = Color.White;
             ClientSize = new Size(616, 339);
             Controls.Add(btnCancelWarning);
-            Controls.Add(btnContinueWarning);
+            Controls.Add(BtnContinueWarning);
             Controls.Add(PopWarningTextBox);
             Controls.Add(pictureBox1);
             MaximumSize = new Size(632, 378);
@@ -108,7 +108,7 @@
 
         #endregion
 
-        private Button btnContinueWarning;
+        private Button BtnContinueWarning;
         private RichTextBox PopWarningTextBox;
         private PictureBox pictureBox1;
         private Button btnCancelWarning;

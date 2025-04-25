@@ -193,6 +193,7 @@
             btnHelp.Text = "          Help";
             btnHelp.TextAlign = ContentAlignment.MiddleLeft;
             btnHelp.UseVisualStyleBackColor = true;
+            btnHelp.Click += btnHelp_Click;
             // 
             // btnLogOut
             // 
@@ -241,7 +242,7 @@
             label3.Size = new Size(152, 39);
             label3.TabIndex = 9;
             label3.Text = "Tuesday:";
-            label3.Click += label3_Click;
+            
             // 
             // label4
             // 
@@ -262,7 +263,7 @@
             label5.Size = new Size(161, 39);
             label5.TabIndex = 11;
             label5.Text = "Thursday:";
-            label5.Click += label5_Click;
+            
             // 
             // label6
             // 
@@ -283,7 +284,7 @@
             label7.Size = new Size(164, 39);
             label7.TabIndex = 13;
             label7.Text = "Saturday:";
-            label7.Click += label7_Click;
+            
             // 
             // label8
             // 
@@ -303,7 +304,7 @@
             labelMonday.Size = new Size(402, 70);
             labelMonday.TabIndex = 15;
             labelMonday.TextAlign = ContentAlignment.MiddleLeft;
-            labelMonday.Click += labelMonday_Click;
+           
             // 
             // labelTuesday
             // 
@@ -313,7 +314,7 @@
             labelTuesday.Size = new Size(402, 70);
             labelTuesday.TabIndex = 16;
             labelTuesday.TextAlign = ContentAlignment.MiddleLeft;
-            labelTuesday.Click += labelTuesday_Click;
+            
             // 
             // labelWednesday
             // 
@@ -323,7 +324,7 @@
             labelWednesday.Size = new Size(401, 70);
             labelWednesday.TabIndex = 17;
             labelWednesday.TextAlign = ContentAlignment.MiddleLeft;
-            labelWednesday.Click += labelWednesday_Click;
+           
             // 
             // labelThursday
             // 
@@ -371,6 +372,7 @@
             button1.TabIndex = 22;
             button1.Text = "Help";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // ShiftManagerForm
             // 
@@ -402,7 +404,7 @@
             Name = "ShiftManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += ShiftManagerForm_Load;
+            
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

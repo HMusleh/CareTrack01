@@ -20,7 +20,7 @@ namespace CareTrack
         }
 
         private bool isDrawing = false;
-        private List<List<Point>> strokes = new List<List<Point>>();
+        private List<List<Point>> strokes = [];
         private List<Point>? currentStroke = null;
 
         //added
@@ -39,7 +39,7 @@ namespace CareTrack
             {
                 if (strokes.Count == 0 || strokes.All(s => s.Count < 2))
                 {
-                    PopWarning warningPopup = new PopWarning("Please sign here before saving.");
+                    PopWarning warningPopup = new("Please sign here before saving.");
                     warningPopup.ShowDialog();
                     return;
                 }
@@ -51,7 +51,7 @@ namespace CareTrack
             {
                 if (string.IsNullOrWhiteSpace(txtTypedSignature.Text))
                 {
-                    PopWarning warningPopup = new PopWarning("Please sign here before saving.");
+                    PopWarning warningPopup = new("Please sign here before saving.");
                     warningPopup.ShowDialog();
                     return;
                 }
@@ -61,7 +61,7 @@ namespace CareTrack
 
             SignatureData = signatureData;
 
-            PopSuccessForm successPopup = new PopSuccessForm("Signature saved successfully!");
+            PopSuccessForm successPopup = new("Signature saved successfully!");
             DialogResult result = successPopup.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -100,8 +100,7 @@ namespace CareTrack
             if (radioDraw.Checked)
             {
                 isDrawing = true;
-                currentStroke = new List<Point>();
-                currentStroke.Add(e.Location);
+                currentStroke = [e.Location];
                 strokes.Add(currentStroke);
             }
         }
@@ -123,49 +122,43 @@ namespace CareTrack
 
         private void signaturePanel_Paint(object sender, PaintEventArgs e)
         {
-            using (Pen pen = new Pen(Color.Black, 2))
+            using Pen pen = new(Color.Black, 2);
+            foreach (var stroke in strokes)
             {
-                foreach (var stroke in strokes)
+                if (stroke.Count > 1)
                 {
-                    if (stroke.Count > 1)
-                    {
-                        e.Graphics.DrawLines(pen, stroke.ToArray());
-                    }
+                    e.Graphics.DrawLines(pen, stroke.ToArray());
                 }
             }
         }
 
         private Bitmap GetSignatureBitmap()
         {
-            Bitmap bmp = new Bitmap(signaturePanel.Width, signaturePanel.Height);
+            Bitmap bmp = new(signaturePanel.Width, signaturePanel.Height);
             signaturePanel.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
             return bmp;
         }
 
-        private byte[] ImageToByteArray(Image image)
+        private static byte[] ImageToByteArray(Image image)
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
-            }
+            using MemoryStream ms = new();
+            image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            return ms.ToArray();
         }
 
         private byte[] ConvertTypedSignatureToImage(string text)
         {
-            using (Bitmap bitmap = new Bitmap(signaturePanel.Width, signaturePanel.Height))
-            using (Graphics g = Graphics.FromImage(bitmap))
-            using (Font font = new Font("Times New Roman", 24, FontStyle.Italic | FontStyle.Underline))
-            using (SolidBrush brush = new SolidBrush(Color.Black))
-            using (MemoryStream ms = new MemoryStream())
-            {
-                g.Clear(Color.White);
-                SizeF textSize = g.MeasureString(text, font);
-                PointF location = new PointF((bitmap.Width - textSize.Width) / 2, (bitmap.Height - textSize.Height) / 2);
-                g.DrawString(text, font, brush, location);
-                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
-            }
+            using Bitmap bitmap = new(signaturePanel.Width, signaturePanel.Height);
+            using Graphics g = Graphics.FromImage(bitmap);
+            using Font font = new("Times New Roman", 24, FontStyle.Italic | FontStyle.Underline);
+            using SolidBrush brush = new(Color.Black);
+            using MemoryStream ms = new();
+            g.Clear(Color.White);
+            SizeF textSize = g.MeasureString(text, font);
+            PointF location = new((bitmap.Width - textSize.Width) / 2, (bitmap.Height - textSize.Height) / 2);
+            g.DrawString(text, font, brush, location);
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            return ms.ToArray();
         }
 
         //again removed what wasn't neccessary anymore because of signatures page but just dashed them out

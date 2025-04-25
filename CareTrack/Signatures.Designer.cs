@@ -110,7 +110,7 @@ namespace CareTrack
             btnSubmit.TabIndex = 7;
             btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = false;
-            btnSubmit.Click += btnSubmit_Click;
+            btnSubmit.Click += BtnSubmit_Click;
             // 
             // panelMenu
             // 
@@ -142,7 +142,7 @@ namespace CareTrack
             btnDropDownMenu.Size = new Size(262, 110);
             btnDropDownMenu.TabIndex = 0;
             btnDropDownMenu.UseVisualStyleBackColor = true;
-            btnDropDownMenu.Click += btnDropDownMenu_Click;
+            btnDropDownMenu.Click += BtnDropDownMenu_Click;
             // 
             // btnHome
             // 
@@ -161,7 +161,7 @@ namespace CareTrack
             btnHome.Text = "          Home";
             btnHome.TextAlign = ContentAlignment.MiddleLeft;
             btnHome.UseVisualStyleBackColor = true;
-            btnHome.Click += btnHome_Click;
+            btnHome.Click += BtnHome_Click;
             // 
             // btnTimeKeeping
             // 
@@ -179,7 +179,7 @@ namespace CareTrack
             btnTimeKeeping.Text = "          Timekeeping";
             btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
             btnTimeKeeping.UseVisualStyleBackColor = true;
-            btnTimeKeeping.Click += btnTimeKeeping_Click;
+            btnTimeKeeping.Click += BtnTimeKeeping_Click;
             // 
             // btnSchedule
             // 
@@ -196,6 +196,7 @@ namespace CareTrack
             btnSchedule.Text = "          Schedule";
             btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
             btnSchedule.UseVisualStyleBackColor = true;
+            btnSchedule.Click += BtnSchedule_Click;
             // 
             // btnTasks
             // 
@@ -213,7 +214,7 @@ namespace CareTrack
             btnTasks.Text = "          Tasks";
             btnTasks.TextAlign = ContentAlignment.MiddleLeft;
             btnTasks.UseVisualStyleBackColor = true;
-            btnTasks.Click += btnTasks_Click;
+            btnTasks.Click += BtnTasks_Click;
             // 
             // btnNotes
             // 
@@ -231,7 +232,7 @@ namespace CareTrack
             btnNotes.Text = "          Notes";
             btnNotes.TextAlign = ContentAlignment.MiddleLeft;
             btnNotes.UseVisualStyleBackColor = true;
-            btnNotes.Click += btnNotes_Click;
+            btnNotes.Click += BtnNotes_Click;
             // 
             // btnHelp
             // 
@@ -248,6 +249,7 @@ namespace CareTrack
             btnHelp.Text = "          Help";
             btnHelp.TextAlign = ContentAlignment.MiddleLeft;
             btnHelp.UseVisualStyleBackColor = true;
+            btnHelp.Click += BtnHelp_Click;
             // 
             // btnLogOut
             // 
@@ -265,7 +267,7 @@ namespace CareTrack
             btnLogOut.Text = "          Logout";
             btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
             btnLogOut.UseVisualStyleBackColor = true;
-            btnLogOut.Click += btnLogOut_Click;
+            btnLogOut.Click += BtnLogOut_Click;
             // 
             // btnClientSign
             // 
@@ -277,7 +279,7 @@ namespace CareTrack
             btnClientSign.TabIndex = 0;
             btnClientSign.Text = "Sign Here";
             btnClientSign.UseVisualStyleBackColor = false;
-            btnClientSign.Click += btnClientSign_Click;
+            btnClientSign.Click += BtnClientSign_Click;
             // 
             // btnCaregiverSign
             // 
@@ -289,7 +291,7 @@ namespace CareTrack
             btnCaregiverSign.TabIndex = 1;
             btnCaregiverSign.Text = "Sign Here";
             btnCaregiverSign.UseVisualStyleBackColor = false;
-            btnCaregiverSign.Click += btnCaregiverSign_Click_1;
+            btnCaregiverSign.Click += BtnCaregiverSign_Click_1;
             // 
             // button1
             // 
@@ -301,6 +303,7 @@ namespace CareTrack
             button1.TabIndex = 8;
             button1.Text = "Help";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += Button1_Click_1;
             // 
             // Signatures
             // 
@@ -325,8 +328,7 @@ namespace CareTrack
             MinimumSize = new Size(1521, 776);
             Name = "Signatures";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
-            Load += Signatures_Load;
+            Text = "Notes Page";
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -347,7 +349,7 @@ namespace CareTrack
         private Label label4;
         private Button btnSubmit;
         private FlowLayoutPanel panelMenu;
-        private Panel panel1;
+       
         private Button btnDropDownMenu;
         private Button btnHome;
         private Button btnTasks;

@@ -1,0 +1,19 @@
+﻿[*.cs]
+
+# CS0219: Variable is assigned but its value is never used
+dotnet_diagnostic.CS0219.severity = silent
+
+# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+dotnet_diagnostic.CS8618.severity = none
+
+# CS8600: Converting null literal or possible null value to non-nullable type.
+dotnet_diagnostic.CS8600.severity = silent
+
+# CS8605: Unboxing a possibly null value.
+dotnet_diagnostic.CS8605.severity = silent
+
+# IDE0044: Add readonly modifier
+dotnet_diagnostic.IDE0044.severity = silent
+
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = silent

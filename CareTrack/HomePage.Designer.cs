@@ -149,6 +149,8 @@ namespace CareTrack
             btnTimeKeeping.Text = "          Timekeeping";
             btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
             btnTimeKeeping.UseVisualStyleBackColor = true;
+            btnTimeKeeping.Click += btnTimeKeeping_Click;
+
             // 
             // btnSchedule
             // 
@@ -165,6 +167,8 @@ namespace CareTrack
             btnSchedule.Text = "          Schedule";
             btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
             btnSchedule.UseVisualStyleBackColor = true;
+            btnSchedule.Click += btnSchedule_Click;
+
             // 
             // btnTasks
             // 
@@ -215,6 +219,7 @@ namespace CareTrack
             btnHelp.Text = "          Help";
             btnHelp.TextAlign = ContentAlignment.MiddleLeft;
             btnHelp.UseVisualStyleBackColor = true;
+            btnHelp.Click += btnHelp_Click;
             // 
             // btnLogOut
             // 
@@ -243,6 +248,7 @@ namespace CareTrack
             button1.TabIndex = 7;
             button1.Text = "Help";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // HomePage
             // 
@@ -264,7 +270,7 @@ namespace CareTrack
             RightToLeft = RightToLeft.No;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CT - Home";
-            Load += HomePage_Load;
+            
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -293,7 +299,6 @@ namespace CareTrack
         private Button btnTimeKeeping;
         private Button btnTasks;
         private Button button1;
-        private Button button2;
         private Button btnHelp;
         private Button btnSchedule;
     }

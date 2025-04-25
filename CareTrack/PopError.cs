@@ -16,12 +16,25 @@ namespace CareTrack
         {
             InitializeComponent();
             PopErrorTextBox.Text = message;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.KeyPreview = true;
+            this.ActiveControl = BtnOK;
+            this.KeyDown += PopErrorForm_KeyDown;
 
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void PopErrorForm_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnOK.PerformClick();
+            }
         }
     }
 }

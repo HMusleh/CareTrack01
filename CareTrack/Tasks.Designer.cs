@@ -57,6 +57,7 @@
             button1.TabIndex = 10;
             button1.Text = "Save and Continue";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -67,7 +68,6 @@
             label1.Size = new Size(159, 56);
             label1.TabIndex = 12;
             label1.Text = "Tasks:";
-            label1.Click += label1_Click;
             // 
             // panelMenu
             // 
@@ -153,6 +153,7 @@
             btnSchedule.Text = "          Schedule";
             btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
             btnSchedule.UseVisualStyleBackColor = true;
+            btnSchedule.Click += btnSchedule_Click;
             // 
             // btnTasks
             // 
@@ -188,7 +189,7 @@
             btnNotes.Text = "          Notes";
             btnNotes.TextAlign = ContentAlignment.MiddleLeft;
             btnNotes.UseVisualStyleBackColor = true;
-            btnNotes.Click += btnNotes_Click;
+            btnNotes.Click += BtnNotes_Click;
             // 
             // btnHelp
             // 
@@ -205,6 +206,7 @@
             btnHelp.Text = "          Help";
             btnHelp.TextAlign = ContentAlignment.MiddleLeft;
             btnHelp.UseVisualStyleBackColor = true;
+            btnHelp.Click += btnHelp_Click;
             // 
             // btnLogOut
             // 
@@ -262,6 +264,7 @@
             button2.TabIndex = 16;
             button2.Text = "Help";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // Tasks
             // 
@@ -281,7 +284,6 @@
             Name = "Tasks";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += Tasks_Load;
             panelMenu.ResumeLayout(false);
             paneltasks.ResumeLayout(false);
             paneltasks.PerformLayout();
@@ -293,7 +295,6 @@
         private Button button1;
         private Label label1;
         private FlowLayoutPanel panelMenu;
-        private Panel panel1;
         private Button btnDropDownMenu;
         private Button btnHome;
         private Button btnTasks;

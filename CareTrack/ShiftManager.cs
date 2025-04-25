@@ -18,13 +18,15 @@ namespace CareTrack
         private int caregiverId;
 
         //databasehelper
-        private DatabaseHelper dbHelper = new DatabaseHelper();
+        private DatabaseHelper dbHelper = new();
 
 
         private bool isMenuExpanded = false;
         public ShiftManagerForm(string username, int id)
         {
             InitializeComponent();
+            btnSchedule.Enabled = false;
+            btnNotes.Enabled = false;
             //dropdown 
             CollapseMenu();
 
@@ -90,21 +92,21 @@ namespace CareTrack
         //homepage button on dropdown menu
         private void btnHome_Click(object sender, EventArgs e)
         {
-            HomePage home = new HomePage(currentUser, caregiverId);
+            HomePage home = new(currentUser, caregiverId);
             home.Show();
             this.Hide();
         }
         //tasks button on dropdown menu
         private void btnTasks_Click(object sender, EventArgs e)
         {
-            Tasks task = new Tasks(caregiverId);
+            Tasks task = new(caregiverId);
             task.Show();
             this.Hide();
         }
 
         private void btnTimeKeeping_Click(object sender, EventArgs e)
         {
-            Timekeeping timekeeping = new Timekeeping(currentUser, caregiverId);
+            Timekeeping timekeeping = new(currentUser, caregiverId);
             timekeeping.Show();
             this.Hide();
         }
@@ -113,17 +115,23 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                PopErrorForm errorPopup = new("Please complete the assigned tasks before accessing the Notes and Signatures page.");
                 errorPopup.ShowDialog();
                 return;
             }
-            Signatures s = new Signatures
+            Signatures s = new                
                 (AppState.caregiverId,
                 AppState.careplanId,
                 AppState.completedTaskId,
                 AppState.completedDescriptions);
+            s.Show();
+            this.Hide();
         }
-
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            Help helpForm = new(currentUser, caregiverId);
+            helpForm.ShowDialog();
+        }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             //ends session with a clean slate
@@ -134,7 +142,7 @@ namespace CareTrack
             AppState.completedDescriptions?.Clear();
 
             //back to login page
-            Login login = new Login();
+            Login login = new();
             login.Show();
 
             //close
@@ -149,7 +157,7 @@ namespace CareTrack
 
 
             //each day to the label
-            Dictionary<DayOfWeek, Label> dayLabels = new Dictionary<DayOfWeek, Label>
+            Dictionary<DayOfWeek, Label> dayLabels = new()
             {
             {DayOfWeek.Monday, labelMonday},
             { DayOfWeek.Tuesday, labelTuesday},
@@ -160,7 +168,7 @@ namespace CareTrack
             { DayOfWeek.Sunday, labelSunday}
             };
 
-            HashSet<DayOfWeek> scheduledDays = new HashSet<DayOfWeek>();
+            HashSet<DayOfWeek> scheduledDays = [];
 
             foreach (var label in dayLabels.Values)
             {
@@ -175,92 +183,62 @@ namespace CareTrack
 
             try
             {
-                using (SqlConnection conn = dbHelper.OpenConnection())
+                using SqlConnection conn = dbHelper.OpenConnection();
+                SqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@caregiverId", caregiverId);
+
+                SqlDataReader dataReader = cmd.ExecuteReader();
+
+                bool found = false;
+
+                while (dataReader.Read())
                 {
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@caregiverId", caregiverId);
+                    found = true;
+                    DateTime shiftDate = dataReader.GetDateTime(0);
+                    TimeSpan start = dataReader.GetTimeSpan(1);
+                    TimeSpan end = dataReader.GetTimeSpan(2);
+                    string status = dataReader.GetString(3);
+                    string ClientName = dataReader.IsDBNull(4) ? "Unknown Client" : dataReader.GetString(4);
 
-                    SqlDataReader dataReader = cmd.ExecuteReader();
 
-                    bool found = false;
 
-                    while (dataReader.Read())
+                    string shiftInfo = $"{shiftDate:dddd, MMM dd} {start:hh\\:mm} - {end:hh\\:mm}\n" + $"Client: {ClientName}\n" + $"Status: {status}";
+
+                    if (dayLabels.TryGetValue(shiftDate.DayOfWeek, out var label) && label != null)
                     {
-                        found = true;
-                        DateTime shiftDate = dataReader.GetDateTime(0);
-                        TimeSpan start = dataReader.GetTimeSpan(1);
-                        TimeSpan end = dataReader.GetTimeSpan(2);
-                        string status = dataReader.GetString(3);
-                        string ClientName = dataReader.GetString(4);
-
-
-                        string shiftInfo = $"{shiftDate:dddd, MMM dd} {start:hh\\:mm} - {end:hh\\:mm}\n" + $"Client: {ClientName}\n" + $"Status: {status}";
-
-                        if (dayLabels.TryGetValue(shiftDate.DayOfWeek, out Label label))
-                        {
-                            if (!string.IsNullOrWhiteSpace(label.Text))
-                                label.Text += "\n\n";
-                            label.Text += shiftInfo;
-                        }
-                        scheduledDays.Add(shiftDate.DayOfWeek);
+                        if (!string.IsNullOrWhiteSpace(label.Text))
+                            label.Text += "\n\n";
+                        label.Text += shiftInfo;
                     }
-                    dataReader.Close();
+                    scheduledDays.Add(shiftDate.DayOfWeek);
+                }
+                dataReader.Close();
 
-                    foreach (var entry in dayLabels)
+                foreach (var entry in dayLabels)
+                {
+                    if (!scheduledDays.Contains(entry.Key))
                     {
-                        if (!scheduledDays.Contains(entry.Key))
-                        {
-                            entry.Value.Text = " Not Scheduled";
-                            entry.Value.ForeColor = Color.Gray;
-                        }
+                        entry.Value.Text = " Not Scheduled";
+                        entry.Value.ForeColor = Color.Gray;
                     }
+                }
 
-                    if (!found)
-                    {
-                        PopErrorForm errorPopup = new PopErrorForm("No shifts found for this week.");
-                        errorPopup.ShowDialog();
-                    }
+                if (!found)
+                {
+                    PopErrorForm errorPopup = new("No shifts found for this week.");
+                    errorPopup.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Error Loading Scheduel: " + ex.Message);
+                PopErrorForm errorPopup = new("Error Loading Scheduel: " + ex.Message);
                 errorPopup.ShowDialog();
             }
         }
-        private void label3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void labelMonday_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelTuesday_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelWednesday_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ShiftManagerForm_Load(object sender, EventArgs e)
-        {
-
+            Help helpForm = new();
+            helpForm.ShowDialog();
         }
     }
 }

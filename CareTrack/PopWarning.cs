@@ -16,15 +16,27 @@ namespace CareTrack
         {
             InitializeComponent();
             PopWarningTextBox.Text = message;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.KeyPreview = true;
+            this.ActiveControl = BtnContinueWarning;
+            this.KeyDown += PopWarning_KeyDown;
+
         }
 
-        private void btnContinueWarning_Click(object sender, EventArgs e)
+        private void BtnContinueWarning_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+        private void PopWarning_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnContinueWarning.PerformClick();
+            }
+        }
 
-        private void btnCancelWarning_Click(object sender, EventArgs e)
+        private void BtnCancelWarning_Click(object sender, EventArgs e)
         {
             this .DialogResult = DialogResult.Cancel;
             this.Close();

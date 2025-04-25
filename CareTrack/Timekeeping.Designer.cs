@@ -36,13 +36,15 @@
             panelMenu = new FlowLayoutPanel();
             btnDropDownMenu = new Button();
             btnHome = new Button();
-            btnTasks = new Button();
             btnTimeKeeping = new Button();
+            btnSchedule = new Button();
+            btnTasks = new Button();
             btnNotes = new Button();
+            btnHelp = new Button();
             btnLogOut = new Button();
             button3 = new Button();
-            btnSchedule = new Button();
-            btnHelp = new Button();
+            lblClockInTime = new Label();
+            lblShiftEndTime = new Label();
             panelMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +57,6 @@
             label1.Size = new Size(190, 33);
             label1.TabIndex = 0;
             label1.Text = "Shift starts at: ";
-            label1.Click += label1_Click_1;
             // 
             // label2
             // 
@@ -78,7 +79,7 @@
             button1.TabIndex = 2;
             button1.Text = "Clock In";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Click += Button1_Click;
             // 
             // button2
             // 
@@ -91,7 +92,7 @@
             button2.TabIndex = 7;
             button2.Text = "Clock Out";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            button2.Click += Button2_Click;
             // 
             // panelMenu
             // 
@@ -123,7 +124,7 @@
             btnDropDownMenu.Size = new Size(262, 110);
             btnDropDownMenu.TabIndex = 0;
             btnDropDownMenu.UseVisualStyleBackColor = true;
-            btnDropDownMenu.Click += btnDropDownMenu_Click;
+            btnDropDownMenu.Click += BtnDropDownMenu_Click;
             // 
             // btnHome
             // 
@@ -142,25 +143,7 @@
             btnHome.Text = "          Home";
             btnHome.TextAlign = ContentAlignment.MiddleLeft;
             btnHome.UseVisualStyleBackColor = true;
-            btnHome.Click += btnHome_Click;
-            // 
-            // btnTasks
-            // 
-            btnTasks.Dock = DockStyle.Top;
-            btnTasks.FlatAppearance.BorderSize = 0;
-            btnTasks.FlatStyle = FlatStyle.Flat;
-            btnTasks.Font = new Font("Century Gothic", 18F);
-            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
-            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTasks.Location = new Point(3, 380);
-            btnTasks.Name = "btnTasks";
-            btnTasks.Size = new Size(268, 81);
-            btnTasks.TabIndex = 7;
-            btnTasks.Tag = "Tasks";
-            btnTasks.Text = "          Tasks";
-            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
-            btnTasks.UseVisualStyleBackColor = true;
-            btnTasks.Click += btnTasks_Click;
+            btnHome.Click += BtnHome_Click;
             // 
             // btnTimeKeeping
             // 
@@ -178,7 +161,42 @@
             btnTimeKeeping.Text = "          Timekeeping";
             btnTimeKeeping.TextAlign = ContentAlignment.MiddleLeft;
             btnTimeKeeping.UseVisualStyleBackColor = true;
-            btnTimeKeeping.Click += btnTimeKeeping_Click;
+            btnTimeKeeping.Click += BtnTimeKeeping_Click;
+            // 
+            // btnSchedule
+            // 
+            btnSchedule.FlatAppearance.BorderSize = 0;
+            btnSchedule.FlatStyle = FlatStyle.Flat;
+            btnSchedule.Font = new Font("Century Gothic", 18F);
+            btnSchedule.Image = (Image)resources.GetObject("btnSchedule.Image");
+            btnSchedule.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSchedule.Location = new Point(3, 293);
+            btnSchedule.Name = "btnSchedule";
+            btnSchedule.Size = new Size(268, 81);
+            btnSchedule.TabIndex = 13;
+            btnSchedule.Tag = "Notes";
+            btnSchedule.Text = "          Schedule";
+            btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
+            btnSchedule.UseVisualStyleBackColor = true;
+            btnSchedule.Click += BtnSchedule_Click;
+            // 
+            // btnTasks
+            // 
+            btnTasks.Dock = DockStyle.Top;
+            btnTasks.FlatAppearance.BorderSize = 0;
+            btnTasks.FlatStyle = FlatStyle.Flat;
+            btnTasks.Font = new Font("Century Gothic", 18F);
+            btnTasks.Image = (Image)resources.GetObject("btnTasks.Image");
+            btnTasks.ImageAlign = ContentAlignment.MiddleLeft;
+            btnTasks.Location = new Point(3, 380);
+            btnTasks.Name = "btnTasks";
+            btnTasks.Size = new Size(268, 81);
+            btnTasks.TabIndex = 7;
+            btnTasks.Tag = "Tasks";
+            btnTasks.Text = "          Tasks";
+            btnTasks.TextAlign = ContentAlignment.MiddleLeft;
+            btnTasks.UseVisualStyleBackColor = true;
+            btnTasks.Click += BtnTasks_Click;
             // 
             // btnNotes
             // 
@@ -196,7 +214,24 @@
             btnNotes.Text = "          Notes";
             btnNotes.TextAlign = ContentAlignment.MiddleLeft;
             btnNotes.UseVisualStyleBackColor = true;
-            btnNotes.Click += btnNotes_Click;
+            btnNotes.Click += BtnNotes_Click;
+            // 
+            // btnHelp
+            // 
+            btnHelp.FlatAppearance.BorderSize = 0;
+            btnHelp.FlatStyle = FlatStyle.Flat;
+            btnHelp.Font = new Font("Century Gothic", 18F);
+            btnHelp.Image = (Image)resources.GetObject("btnHelp.Image");
+            btnHelp.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHelp.Location = new Point(3, 554);
+            btnHelp.Name = "btnHelp";
+            btnHelp.Size = new Size(268, 81);
+            btnHelp.TabIndex = 14;
+            btnHelp.Tag = "Notes";
+            btnHelp.Text = "          Help";
+            btnHelp.TextAlign = ContentAlignment.MiddleLeft;
+            btnHelp.UseVisualStyleBackColor = true;
+            btnHelp.Click += BtnHelp_Click;
             // 
             // btnLogOut
             // 
@@ -214,7 +249,7 @@
             btnLogOut.Text = "          Logout";
             btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
             btnLogOut.UseVisualStyleBackColor = true;
-            btnLogOut.Click += btnLogOut_Click;
+            btnLogOut.Click += BtnLogOut_Click;
             // 
             // button3
             // 
@@ -226,38 +261,27 @@
             button3.TabIndex = 8;
             button3.Text = "Help";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += Button3_Click;
             // 
-            // btnSchedule
+            // lblClockInTime
             // 
-            btnSchedule.FlatAppearance.BorderSize = 0;
-            btnSchedule.FlatStyle = FlatStyle.Flat;
-            btnSchedule.Font = new Font("Century Gothic", 18F);
-            btnSchedule.Image = (Image)resources.GetObject("btnSchedule.Image");
-            btnSchedule.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSchedule.Location = new Point(3, 293);
-            btnSchedule.Name = "btnSchedule";
-            btnSchedule.Size = new Size(268, 81);
-            btnSchedule.TabIndex = 13;
-            btnSchedule.Tag = "Notes";
-            btnSchedule.Text = "          Schedule";
-            btnSchedule.TextAlign = ContentAlignment.MiddleLeft;
-            btnSchedule.UseVisualStyleBackColor = true;
+            lblClockInTime.AutoSize = true;
+            lblClockInTime.Font = new Font("Century Gothic", 14F);
+            lblClockInTime.Location = new Point(950, 190);
+            lblClockInTime.Name = "lblClockInTime";
+            lblClockInTime.Size = new Size(22, 22);
+            lblClockInTime.TabIndex = 0;
+            lblClockInTime.Text = "--";
             // 
-            // btnHelp
+            // lblShiftEndTime
             // 
-            btnHelp.FlatAppearance.BorderSize = 0;
-            btnHelp.FlatStyle = FlatStyle.Flat;
-            btnHelp.Font = new Font("Century Gothic", 18F);
-            btnHelp.Image = (Image)resources.GetObject("btnHelp.Image");
-            btnHelp.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHelp.Location = new Point(3, 554);
-            btnHelp.Name = "btnHelp";
-            btnHelp.Size = new Size(268, 81);
-            btnHelp.TabIndex = 14;
-            btnHelp.Tag = "Notes";
-            btnHelp.Text = "          Help";
-            btnHelp.TextAlign = ContentAlignment.MiddleLeft;
-            btnHelp.UseVisualStyleBackColor = true;
+            lblShiftEndTime.AutoSize = true;
+            lblShiftEndTime.Font = new Font("Century Gothic", 14F);
+            lblShiftEndTime.Location = new Point(950, 410);
+            lblShiftEndTime.Name = "lblShiftEndTime";
+            lblShiftEndTime.Size = new Size(22, 22);
+            lblShiftEndTime.TabIndex = 1;
+            lblShiftEndTime.Text = "--";
             // 
             // Timekeeping
             // 
@@ -267,6 +291,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1505, 737);
+            Controls.Add(lblClockInTime);
+            Controls.Add(lblShiftEndTime);
             Controls.Add(button3);
             Controls.Add(panelMenu);
             Controls.Add(button2);
@@ -278,7 +304,6 @@
             Name = "Timekeeping";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CT - Time Punch";
-            Load += Timekeeping_Load;
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -300,5 +325,8 @@
         private Button button3;
         private Button btnSchedule;
         private Button btnHelp;
+        private Label lblClockInTime;
+        private Label lblShiftEndTime;
+
     }
 }

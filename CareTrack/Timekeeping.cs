@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Data;
-using Azure.Identity;
+﻿using Microsoft.Data.SqlClient;
+using Timer = System.Windows.Forms.Timer;
+
 
 namespace CareTrack
 {
@@ -20,19 +11,24 @@ namespace CareTrack
         //passing caregiver id and username from homepage to timekeeping
         private string currentUser;
         private int caregiverId;
-
+        private System.Windows.Forms.Timer inactivityTimer;
         private bool isMenuExpanded = false;
 
         public Timekeeping(string username, int id)
         {
             InitializeComponent();
             btnTimeKeeping.Enabled = false;
+            btnNotes.Enabled = false;
             CollapseMenu();
 
             //initializing the username and id components
             currentUser = username;
             caregiverId = id;
-
+            inactivityTimer = new System.Windows.Forms.Timer
+            {
+                Interval = 60000
+            };
+            inactivityTimer.Tick += InactivityTimer_Tick;
 
         }
 
@@ -73,7 +69,7 @@ namespace CareTrack
 
         //now the buttons 
         //button drop down menu
-        private void btnDropDownMenu_Click(object sender, EventArgs e)
+        private void BtnDropDownMenu_Click(object sender, EventArgs e)
         {
             if (isMenuExpanded)
             {
@@ -86,43 +82,45 @@ namespace CareTrack
         }
 
         //homepage button on dropdown menu
-        private void btnHome_Click(object sender, EventArgs e)
+        private void BtnHome_Click(object sender, EventArgs e)
         {
-            HomePage home = new HomePage(currentUser, caregiverId);
+            HomePage home = new(currentUser, caregiverId);
             home.Show();
             this.Hide();
         }
         //tasks button on dropdown menu
-        private void btnTasks_Click(object sender, EventArgs e)
+        private void BtnTasks_Click(object sender, EventArgs e)
         {
-            Tasks task = new Tasks(caregiverId);
+            Tasks task = new(caregiverId);
             task.Show();
             this.Hide();
         }
 
-        private void btnTimeKeeping_Click(object sender, EventArgs e)
+        private void BtnTimeKeeping_Click(object sender, EventArgs e)
         {
-            Timekeeping timekeeping = new Timekeeping(currentUser, caregiverId);
+            Timekeeping timekeeping = new(currentUser, caregiverId);
             timekeeping.Show();
             this.Hide();
         }
 
-        private void btnNotes_Click(object sender, EventArgs e)
+        private void BtnNotes_Click(object sender, EventArgs e)
         {
             if (!AppState.TasksCompleted)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                PopErrorForm errorPopup = new("Please complete the assigned tasks before accessing the Notes and Signatures page.");
                 errorPopup.ShowDialog();
                 return;
             }
-            Signatures s = new Signatures
+            Signatures s = new
                 (AppState.caregiverId,
                 AppState.careplanId,
                 AppState.completedTaskId,
                 AppState.completedDescriptions);
+            s.Show();
+            this.Hide();
         }
 
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void BtnLogOut_Click(object sender, EventArgs e)
         {
             //ends session with a clean slate
             AppState.caregiverId = 0;
@@ -132,36 +130,14 @@ namespace CareTrack
             AppState.completedDescriptions?.Clear();
 
             //back to login page
-            Login login = new Login();
+            Login login = new();
             login.Show();
 
             //close
             this.Close();
-
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
         }
         //clock in button
-        private void button1_Click(object sender, EventArgs e)
+        private async void Button1_Click(object sender, EventArgs e)
         {
             //realtime and date
             DateTime now = DateTime.Now;
@@ -170,27 +146,52 @@ namespace CareTrack
             //database connector
             try
             {
-                DatabaseHelper db = new DatabaseHelper();
+                DatabaseHelper db = new();
                 using (SqlConnection conn = db.OpenConnection())
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@CaregiverId", caregiverId);
                     cmd.Parameters.AddWithValue("@ClockIn", now);
                     cmd.ExecuteNonQuery();
                 }
+                lblClockInTime.Text = now.ToString("hh:mm tt"); // show actual clock-in time
+                SetShiftEndTime(now); // load and show scheduled shift end time
                 //message box for successful clocking in with time
-                PopSuccessForm successPopup = new PopSuccessForm($"Clock-In at {now}");
+                PopSuccessForm successPopup = new($"Clock-In at {now}");
                 successPopup.Show();
+
+                await Task.Delay(3000);
+                DialogResult toTasks = MessageBox.Show("Do you want to go to the Tasks page?", "Next Step", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (toTasks == DialogResult.Yes)
+                {
+                    Tasks taskForm = new(caregiverId);
+                    taskForm.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    DialogResult logout = MessageBox.Show("Do you want to logout of the app?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (logout == DialogResult.Yes)
+                    {
+                        Login login = new();
+                        login.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        inactivityTimer.Start();
+                    }
+                }
             }
             catch (Exception ex)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Clock-In Failed: " + ex.Message);
+                PopErrorForm errorPopup = new("Clock-In Failed: " + ex.Message);
                 errorPopup.ShowDialog();
             }
         }
 
         //clock out button
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
 
             //realtime date
@@ -200,39 +201,125 @@ namespace CareTrack
             //db connection
             try
             {
-                DatabaseHelper db = new DatabaseHelper();
-                using (SqlConnection conn = db.OpenConnection())
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                DatabaseHelper db = new();
+                using SqlConnection conn = db.OpenConnection();
+                using SqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@CaregiverId", caregiverId);
+                cmd.Parameters.AddWithValue("@ClockOut", now);
+
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                //pop up for clock out
+                if (rowsAffected > 0)
                 {
-                    cmd.Parameters.AddWithValue("@CaregiverId", caregiverId);
-                    cmd.Parameters.AddWithValue("@ClockOut", now);
+                    // Show pop-up with Clock-Out time
+                    PopSuccessForm successPopup = new($"Clock-Out at {now}");
+                    successPopup.ShowDialog(); // Wait for popup to close
 
+                    // Ask: View Schedule?
+                    DialogResult viewSchedule = MessageBox.Show("Do you want to view your schedule?", "View Schedule", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    //pop up for clock out
-                    if (rowsAffected > 0)
+                    if (viewSchedule == DialogResult.Yes)
                     {
-                        PopSuccessForm successPopup = new PopSuccessForm($"Clock-Out at {now}");
-                        successPopup.ShowDialog();
+                        ShiftManagerForm scheduleForm = new(currentUser, caregiverId);
+                        scheduleForm.Show();
+                        this.Hide();
                     }
                     else
                     {
-                        PopErrorForm errorPopup = new PopErrorForm("No Clock-In Found to Clock-Out.");
-                        errorPopup.ShowDialog();
+                        // Ask: Logout?
+                        DialogResult logout = MessageBox.Show("Do you want to logout of the app?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (logout == DialogResult.Yes)
+                        {
+                            Login loginForm = new();
+                            loginForm.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            // Wait 10 seconds, then auto-logout and exit
+                            Timer autoLogoutTimer = new()
+                            {
+                                Interval = 10000 // 10 seconds
+                            };
+                            autoLogoutTimer.Tick += (s, args) =>
+                            {
+                                autoLogoutTimer.Stop();
+                                Application.Exit();
+                            };
+                            autoLogoutTimer.Start();
+                        }
                     }
+                }
+                else
+                {
+
                 }
             }
             catch (Exception ex)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Clock-Out Failed: " + ex.Message);
+                PopErrorForm errorPopup = new("Clock-Out Failed: " + ex.Message);
+            }
+        }
+
+
+
+        private void BtnSchedule_Click(object sender, EventArgs e)
+        {
+            ShiftManagerForm scheduleForm = new(currentUser, caregiverId);
+            scheduleForm.Show();
+            this.Hide();
+        }
+
+        private void BtnHelp_Click(object sender, EventArgs e)
+        {
+            Help helpForm = new(currentUser, caregiverId);
+            helpForm.ShowDialog();
+        }
+        private void SetShiftEndTime(DateTime clockIn)
+        {
+            string query = @"SELECT end_time FROM Shifts_Assignment 
+                     WHERE CaregiverID = @CaregiverId AND shift_date = @ShiftDate";
+
+            try
+            {
+                DatabaseHelper db = new();
+                using SqlConnection conn = db.OpenConnection();
+                using SqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@CaregiverId", caregiverId);
+                cmd.Parameters.AddWithValue("@ShiftDate", clockIn.Date);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    TimeSpan shiftEnd = (TimeSpan)result;
+                    lblShiftEndTime.Text = shiftEnd.ToString(@"hh\:mm");
+                }
+                else
+                {
+                    lblShiftEndTime.Text = "Not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                PopErrorForm errorPopup = new("Failed to load shift end time: " + ex.Message);
                 errorPopup.ShowDialog();
             }
         }
 
-        private void Timekeeping_Load(object sender, EventArgs e)
+        private void InactivityTimer_Tick(object? sender, EventArgs e)
         {
+            inactivityTimer.Stop(); // Stop the timer
+            Application.Exit(); // Exit the app
+        }
 
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            Help helpForm = new();
+            helpForm.ShowDialog();
         }
     }
 }

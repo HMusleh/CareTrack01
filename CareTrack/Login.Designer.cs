@@ -87,6 +87,7 @@ namespace CareTrack
             linkLabel1.TabIndex = 4;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Forgot username?";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked_1;
             // 
             // linkLabel2
             // 
@@ -99,6 +100,7 @@ namespace CareTrack
             linkLabel2.TabIndex = 5;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Forgot password?";
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked_1;
             // 
             // button2
             // 

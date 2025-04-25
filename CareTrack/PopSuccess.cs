@@ -16,19 +16,21 @@ namespace CareTrack
         {
             InitializeComponent();
             PopSuccessTextBox.Text = message;
+            
+            this.ActiveControl = BtnContinue;
+            this.KeyPreview = true;
+            this.KeyDown += PopSuccessForm_KeyDown;
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PopSuccessForm_KeyDown(object? sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnContinue.PerformClick();
+            }
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void btnContinue_Click(object sender, EventArgs e)
+        private void BtnContinue_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();

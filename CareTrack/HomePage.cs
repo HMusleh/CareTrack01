@@ -30,31 +30,36 @@ namespace CareTrack
             //collapse menu
             CollapseMenu();
             btnHome.Enabled = false;
+            btnNotes.Enabled = false;
         }
 
         //main action buttons
         //btnviewtimekeeping
         private void btnClockInOut_Click(object sender, EventArgs e)
         {
-            Timekeeping tk = new Timekeeping(currentUser, caregiverId);
+            Timekeeping tk = new(currentUser, caregiverId);
             tk.Show();
             this.Hide();
         }
         //btn view tasks
         private void btnViewTasks_Click(object sender, EventArgs e)
         {
-            Tasks task = new Tasks(caregiverId);
+            Tasks task = new(caregiverId);
             task.Show();
             this.Hide();
         }
         //btn view schedule 
         private void btnViewSchedule_Click(object sender, EventArgs e)
         {
-            ShiftManagerForm schedule = new ShiftManagerForm(currentUser, caregiverId);
+            ShiftManagerForm schedule = new(currentUser, caregiverId);
             schedule.Show();
             this.Hide();
         }
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Help helpForm = new();
+            helpForm.ShowDialog();
+        }
 
 
         //method for collapseing the menu
@@ -67,7 +72,7 @@ namespace CareTrack
             btnNotes.Visible = false;
             btnHelp.Visible = false;
             btnLogOut.Visible = false;
-           
+
             panelMenu.Height = btnDropDownMenu.Height;
 
             isMenuExpanded = false;
@@ -108,21 +113,21 @@ namespace CareTrack
         //homepage button on dropdown menu
         private void btnHome_Click(object sender, EventArgs e)
         {
-            HomePage home = new HomePage(currentUser, caregiverId);
+            HomePage home = new(currentUser, caregiverId);
             home.Show();
             this.Hide();
         }
         //tasks button on dropdown menu
         private void btnTasks_Click(object sender, EventArgs e)
         {
-            Tasks task = new Tasks(caregiverId);
+            Tasks task = new(caregiverId);
             task.Show();
             this.Hide();
         }
 
         private void btnTimeKeeping_Click(object sender, EventArgs e)
         {
-            Timekeeping timekeeping = new Timekeeping(currentUser, caregiverId);
+            Timekeeping timekeeping = new(currentUser, caregiverId);
             timekeeping.Show();
             this.Hide();
         }
@@ -131,15 +136,17 @@ namespace CareTrack
         {
             if (!AppState.TasksCompleted)
             {
-                PopErrorForm errorPopup = new PopErrorForm("Please complete the assigned tasks before accessing the Notes and Signatures page.");
+                PopErrorForm errorPopup = new("Please complete the assigned tasks before accessing the Notes and Signatures page.");
                 errorPopup.ShowDialog();
                 return;
             }
-            Signatures s = new Signatures
+            Signatures s = new                
                 (AppState.caregiverId,
                 AppState.careplanId,
                 AppState.completedTaskId,
                 AppState.completedDescriptions);
+            s.Show();
+            this.Hide();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -152,7 +159,7 @@ namespace CareTrack
             AppState.completedDescriptions?.Clear();
 
             //back to login page
-            Login login = new Login();
+            Login login = new();
             login.Show();
 
             //close
@@ -160,15 +167,21 @@ namespace CareTrack
 
 
         }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void btnHelp_Click(object sender, EventArgs e)
         {
+            Help helpForm = new(currentUser, caregiverId);
+            helpForm.ShowDialog();
+        }
+        
 
+        private void btnSchedule_Click(object sender, EventArgs e)
+        {
+            ShiftManagerForm scheduleForm = new(currentUser, caregiverId);
+            scheduleForm.Show();
+            this.Hide();
         }
 
-        private void HomePage_Load(object sender, EventArgs e)
-        {
+        
 
-        }
     }
 }

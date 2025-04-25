@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopErrorForm));
             PopErrorTextBox = new RichTextBox();
             pictureBox1 = new PictureBox();
-            btnOK = new Button();
+            BtnOK = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -59,17 +59,19 @@
             // 
             // btnOK
             // 
-            btnOK.BackColor = Color.LightCoral;
-            btnOK.FlatAppearance.BorderSize = 0;
-            btnOK.FlatStyle = FlatStyle.Flat;
-            btnOK.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnOK.Location = new Point(181, 266);
-            btnOK.Name = "btnOK";
-            btnOK.Size = new Size(254, 35);
-            btnOK.TabIndex = 9;
-            btnOK.Text = "OK";
-            btnOK.UseVisualStyleBackColor = false;
-            btnOK.Click += btnOK_Click;
+            BtnOK.BackColor = Color.LightCoral;
+            BtnOK.FlatAppearance.BorderSize = 0;
+            BtnOK.FlatStyle = FlatStyle.Flat;
+            BtnOK.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnOK.Location = new Point(181, 266);
+            BtnOK.Name = "BtnOK";
+            BtnOK.Size = new Size(254, 35);
+            BtnOK.TabIndex = 9;
+            BtnOK.Text = "OK";
+            BtnOK.UseVisualStyleBackColor = false;
+            BtnOK.Click += BtnOK_Click;
+            
+
             // 
             // PopErrorForm
             // 
@@ -77,7 +79,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(616, 339);
-            Controls.Add(btnOK);
+            Controls.Add(BtnOK);
             Controls.Add(PopErrorTextBox);
             Controls.Add(pictureBox1);
             MaximumSize = new Size(632, 378);
@@ -94,6 +96,6 @@
 
         private RichTextBox PopErrorTextBox;
         private PictureBox pictureBox1;
-        private Button btnOK;
+        private Button BtnOK;
     }
 }

@@ -61,7 +61,7 @@ namespace CareTrack
             BtnNotes.Visible = true;
             BtnHelp.Visible = true;
             BtnLogOut.Visible = true;
-            PanelMenu.Height = 888;
+            PanelMenu.Height = 1019;
             isMenuExpanded = true;
         }
         private void BtnDropDownMenu_Click(object sender, EventArgs e)
